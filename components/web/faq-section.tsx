@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+import { RevealText } from "@/components/ui/reveal-text";
+
 const FAQS = [
   {
     question: "How long does it take to build a website?",
@@ -70,13 +72,17 @@ export const FAQSection = () => {
       <div className="max-w-5xl w-full flex flex-col md:flex-row gap-12 md:gap-16 items-start">
         {/* Sticky Header Column */}
         <div className="w-full md:w-1/3 md:sticky md:top-32">
-          <p className="text-orange-500 font-roboto-condensed font-bold uppercase tracking-[0.2em] text-sm mb-4">
-            Got Questions?
-          </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-cabinet text-foreground uppercase leading-[0.9] tracking-tighter">
-            Frequently
-            <br className="" /> <span className="text-orange-500">Asked</span><br/>Questions
-          </h2>
+          <RevealText 
+            text="Got Questions?" 
+            className="text-orange-500 font-roboto-condensed font-bold uppercase tracking-[0.2em] text-sm mb-4" 
+          />
+          <div className="w-min md:w-[6ch]">
+            <RevealText
+              text="Frequently Asked Questions"
+              highlightedWords={["Asked"]}
+              className="text-4xl md:text-5xl lg:text-6xl font-black font-cabinet text-foreground uppercase leading-[0.9] tracking-tighter"
+            />
+          </div>
           <p className="mt-6 text-foreground/60 font-poppins text-sm md:text-base leading-relaxed max-w-sm">
             Everything you need to know about my process, pricing, and how we can collaborate.
           </p>

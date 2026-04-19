@@ -43,30 +43,24 @@ const ArrowButton = ({
 /* ─── Infinite Carousel ─── */
 export const Projects = () => {
   const GAP = 24;
-  const trackRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const [cardWidth, setCardWidth] = useState(0);
-  const [visibleCards, setVisibleCards] = useState(4);
-  const [activeLogicalIndex, setActiveLogicalIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
   const isAnimating = useRef(false);
 
   const total = projects.length;
-  // Triple the array for infinite scroll
-  const tripled = [...projects, ...projects, ...projects];
 
-  const [isMobile, setIsMobile] = useState(false);
-
+  // ─── Measure ───
   const measure = useCallback(() => {
-    if (!containerRef.current) return;
-    const parentW =
-      containerRef.current.parentElement?.offsetWidth || window.innerWidth;
+    if (typeof window === "undefined") return;
     const mobile = window.innerWidth < 768;
     setIsMobile(mobile);
-    const v = mobile ? 1 : 4;
-    setVisibleCards(v);
 
-    // Mobile card is 75% of parent width, Desktop follows grid
+    const parentW =
+      containerRef.current?.parentElement?.offsetWidth || window.innerWidth;
+    const v = mobile ? 1 : 4;
     const w = mobile ? parentW * 0.75 : (parentW - GAP * (v - 1)) / v;
     setCardWidth(w);
   }, []);
@@ -77,16 +71,70 @@ export const Projects = () => {
     return () => window.removeEventListener("resize", measure);
   }, [measure]);
 
-  // Initial position: center the middle set's first card
+  // ─── Computed helpers ───
+  const step = cardWidth + GAP;
+  const oneSetWidth = total * step;
+  const centerOffset = isMobile
+    ? (typeof window !== "undefined" ? window.innerWidth : 0) - cardWidth
+    : 0;
+  const halfCenter = centerOffset / 2;
+
+  // Position for a given logical index (within the middle set of the tripled array)
+  const positionForIndex = useCallback(
+    (idx: number) => {
+      return -(oneSetWidth + idx * step) + halfCenter;
+    },
+    [oneSetWidth, step, halfCenter]
+  );
+
+  // Set initial position once cardWidth is known
   useEffect(() => {
     if (cardWidth > 0) {
-      const oneSetWidth = total * (cardWidth + GAP);
-      const centerOffset = window.innerWidth < 768 ? (window.innerWidth - cardWidth) / 2 : 0;
-      x.set(-oneSetWidth + centerOffset);
+      x.set(positionForIndex(0));
     }
-  }, [cardWidth, total, x]);
+  }, [cardWidth, positionForIndex, x]);
 
-  // Handle mouse wheel scrolling
+  // ─── Loop correction ───
+  const correctLoop = useCallback(
+    (currentX: number) => {
+      // boundary for the tripled array: we want to stay in the "middle" set
+      const leftBound = -(oneSetWidth * 2) + halfCenter;
+      const rightBound = -oneSetWidth + step + halfCenter;
+
+      if (currentX <= leftBound) return currentX + oneSetWidth;
+      if (currentX >= rightBound) return currentX - oneSetWidth;
+      return currentX;
+    },
+    [oneSetWidth, step, halfCenter]
+  );
+
+  // ─── Arrow navigation ───
+  const slide = useCallback(
+    (dir: number) => {
+      if (isAnimating.current || cardWidth === 0) return;
+      isAnimating.current = true;
+
+      const newIndex = (activeIndex + dir + total) % total;
+      setActiveIndex(newIndex);
+
+      const targetX = x.get() - step * dir;
+
+      animate(x, targetX, {
+        type: "spring",
+        stiffness: 220,
+        damping: 30,
+        mass: 1,
+        onComplete: () => {
+          const corrected = correctLoop(x.get());
+          if (corrected !== x.get()) x.set(corrected);
+          isAnimating.current = false;
+        },
+      });
+    },
+    [activeIndex, cardWidth, correctLoop, step, total, x]
+  );
+
+  // ─── Mouse wheel scrolling ───
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -95,61 +143,18 @@ export const Projects = () => {
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY) || e.shiftKey) {
         e.preventDefault();
         const currentX = x.get();
-        const newX = currentX - e.deltaX - e.deltaY;
-        x.set(newX);
-
-        const oneSetWidth = total * (cardWidth + GAP);
-        const centerOffset = window.innerWidth < 768 ? (window.innerWidth - cardWidth) / 2 : 0;
-        
-        // Boundaries with offset
-        if (newX <= -(oneSetWidth * 2) + centerOffset) x.set(newX + oneSetWidth);
-        if (newX >= -oneSetWidth + (cardWidth + GAP) + centerOffset) x.set(newX - oneSetWidth);
+        const delta = e.deltaX || e.deltaY;
+        const newX = currentX - delta;
+        x.set(correctLoop(newX));
       }
     };
 
     container.addEventListener("wheel", handleWheel, { passive: false });
     return () => container.removeEventListener("wheel", handleWheel);
-  }, [cardWidth, total, x]);
+  }, [correctLoop, x]);
 
-  const slide = useCallback(
-    (dir: number) => {
-      if (isAnimating.current || cardWidth === 0) return;
-      isAnimating.current = true;
-
-      const step = (cardWidth + GAP) * dir;
-      const targetX = x.get() - step;
-
-      setActiveLogicalIndex((prev) => (prev + dir + total) % total);
-
-      animate(x, targetX, {
-        type: "spring",
-        stiffness: 220,
-        damping: 30,
-        mass: 1,
-        onComplete: () => {
-          const oneSetWidth = total * (cardWidth + GAP);
-          const centerOffset = window.innerWidth < 768 ? (window.innerWidth - cardWidth) / 2 : 0;
-          const current = x.get();
-
-          if (current <= -(oneSetWidth * 2) + centerOffset) {
-            x.set(current + oneSetWidth);
-          }
-          if (current >= -oneSetWidth + (cardWidth + GAP) + centerOffset) {
-            x.set(current - oneSetWidth);
-          }
-
-          isAnimating.current = false;
-        },
-      });
-    },
-    [cardWidth, total, x],
-  );
-
-  // Drag constraints to prevent excessive scrolling beyond loops
-  const dragConstraints = {
-    left: -(total * 2 * (cardWidth + GAP)),
-    right: 0,
-  };
+  // Triple the array for infinite scroll
+  const tripled = [...projects, ...projects, ...projects];
 
   return (
     <section
@@ -180,32 +185,36 @@ export const Projects = () => {
         <div className="relative">
           <div
             ref={containerRef}
-            className="overflow-hidden mx-auto"
+            className="overflow-hidden mx-auto w-full"
             style={{
-              width: isMobile && cardWidth > 0 ? "100%" : "100%",
-              // @ts-ignore
-              WebkitMaskImage: isMobile ? "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)" : "none",
-              maskImage: isMobile ? "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)" : "none",
+              WebkitMaskImage: isMobile
+                ? "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)"
+                : "none",
+              maskImage: isMobile
+                ? "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)"
+                : "none",
             }}
           >
             <motion.div
-              ref={trackRef}
               drag="x"
-              dragConstraints={dragConstraints}
-              onDragEnd={(e, info) => {
+              dragConstraints={{
+                left: -(total * 2 * step),
+                right: 0,
+              }}
+              dragElastic={0.05}
+              onDragEnd={(_e, info) => {
                 const threshold = 50;
-                if (info.offset.x < -threshold) slide(1);
-                else if (info.offset.x > threshold) slide(-1);
-                else {
-                    const oneSetWidth = total * (cardWidth + GAP);
-                    const currentOff = Math.abs(x.get()) - oneSetWidth;
-                    const nearestIdx = Math.round(currentOff / (cardWidth + GAP));
-                    
-                    // Centering logic for mobile
-                    const centerOffset = isMobile ? (window.innerWidth - cardWidth) / 2 : 0;
-                    const targetX = -(oneSetWidth + nearestIdx * (cardWidth + GAP)) + centerOffset;
-                    
-                    animate(x, targetX, { type: "spring", stiffness: 300, damping: 30 });
+                if (info.offset.x < -threshold) {
+                  slide(1);
+                } else if (info.offset.x > threshold) {
+                  slide(-1);
+                } else {
+                  // Snap to nearest card
+                  animate(x, positionForIndex(activeIndex), {
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 30,
+                  });
                 }
               }}
               className="flex items-center cursor-grab active:cursor-grabbing"
@@ -218,9 +227,7 @@ export const Projects = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="relative shrink-0 flex flex-col group cursor-pointer"
-                  style={{
-                    width: `${cardWidth}px`,
-                  }}
+                  style={{ width: `${cardWidth}px` }}
                 >
                   <motion.div
                     whileTap={{ scale: 0.98 }}
@@ -258,12 +265,12 @@ export const Projects = () => {
             </motion.div>
           </div>
 
-          {/* Navigation Controls — Centered dots and side arrows (Mobile Only Arrows) */}
+          {/* Navigation Controls */}
           <div className="mt-12 w-full flex flex-col items-center gap-8">
-            {/* Centered Pagination Dots */}
+            {/* Pagination Dots */}
             <div className="flex gap-3 items-center">
               {projects.map((_, i) => {
-                const isActive = i === activeLogicalIndex;
+                const isActive = i === activeIndex;
                 return (
                   <motion.div
                     key={i}
@@ -276,14 +283,24 @@ export const Projects = () => {
                     }}
                     className="h-2 rounded-full cursor-pointer"
                     onClick={() => {
-                      // Optional: jump to specific card
+                      if (isAnimating.current) return;
+                      isAnimating.current = true;
+                      setActiveIndex(i);
+                      animate(x, positionForIndex(i), {
+                        type: "spring",
+                        stiffness: 220,
+                        damping: 30,
+                        onComplete: () => {
+                          isAnimating.current = false;
+                        },
+                      });
                     }}
                   />
                 );
               })}
             </div>
 
-            {/* Arrows at bottom for Mobile only */}
+            {/* Arrows for Mobile */}
             <div className="flex md:hidden gap-4">
               <ArrowButton direction="left" onClick={() => slide(-1)} />
               <ArrowButton direction="right" onClick={() => slide(1)} />

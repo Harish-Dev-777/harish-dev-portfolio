@@ -55,12 +55,12 @@ export const metadata: Metadata = {
   description: "Web Developer and Freelancer Portfolio",
 };
 
-import Script from 'next/script';
 import { ThemeProvider } from "../components/theme-provider";
 import IntroTransition from "@/components/web/intro-transition";
 import ThemeSwitch from "@/components/ui/theme-switch";
 import { ScrollSocials } from "@/components/web/scroll-socials";
 import { MusicToggle } from "@/components/web/music-toggle";
+import { ConvexClientProvider } from "@/components/convex-client-provider";
 
 export default function RootLayout({
   children,
@@ -73,36 +73,26 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${cabinet.variable} ${robotoCondensed.variable} ${caveat.variable} ${poppins.variable} h-full antialiased`}
     >
-      <Script
-        id="theme-switcher-v3"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            (function() {
-              try {
-                var theme = localStorage.getItem('theme');
-                var supportDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                if (theme === 'dark' || (!theme && supportDark)) {
-                  document.documentElement.classList.add('dark');
-                } else {
-                  document.documentElement.classList.remove('dark');
-                }
-              } catch (e) {}
-            })();
-          `,
-        }}
-      />
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(t==='dark'||(!t&&d)){document.documentElement.classList.add('dark')}else{document.documentElement.classList.remove('dark')}}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className="font-roboto-condensed min-h-full flex flex-col relative text-foreground">
         <IntroTransition />
-        <ThemeProvider>
-          {children}
-          {/* Global UI Elements */}
-          <ScrollSocials />
-          <div className="fixed bottom-8 right-8 z-[100] flex flex-col items-center space-y-4">
-            <MusicToggle />
-            <ThemeSwitch />
-          </div>
-        </ThemeProvider>
+        <ConvexClientProvider>
+          <ThemeProvider>
+            {children}
+            {/* Global UI Elements */}
+            <ScrollSocials />
+            <div className="fixed bottom-8 right-8 z-[100] flex flex-col items-center space-y-4">
+              <MusicToggle />
+              <ThemeSwitch />
+            </div>
+          </ThemeProvider>
+        </ConvexClientProvider>
       </body>
     </html>
   );
