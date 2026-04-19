@@ -7,7 +7,7 @@ import { Nav } from '@/components/web/nav';
 const Hero = () => {
   return (
     <div className="bg-white min-h-screen font-sans selection:bg-orange-200 text-black">
-      <Nav logoText="Harish." />
+      <Nav />
       <TypographyHero
         greeting="Hi👋, my name is Harish and I'm a freelancer."
         heading1="WEB DEVELOPER"
