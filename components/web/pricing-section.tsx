@@ -2,6 +2,7 @@
 
 import { CreativePricing, type PricingTier } from "@/components/ui/creative-pricing";
 import { Circle, Star } from "lucide-react";
+import { RevealText } from "@/components/ui/reveal-text";
 
 const pricingTiers: PricingTier[] = [
     {
@@ -41,7 +42,13 @@ export function PricingSection() {
         <section id="pricing" className="min-h-screen md:h-screen flex flex-col items-center justify-center relative overflow-hidden bg-background py-10 md:py-0">
             <CreativePricing 
                 tag="Simple Pricing"
-                title="Simple Pricing. Powerful Results."
+                title={
+                    <RevealText 
+                        text="Simple Pricing. Powerful Results." 
+                        highlightedWords={["Powerful"]} 
+                        className="text-inherit font-inherit max-w-[280px] md:max-w-none justify-center"
+                    />
+                }
                 description="Invest in an online presence that works as hard as you do."
                 tiers={pricingTiers}
             />

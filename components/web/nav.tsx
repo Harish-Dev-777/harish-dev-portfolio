@@ -144,8 +144,11 @@ export const Nav = () => {
                         opacity: 1,
                         transition: {
                           staggerChildren: 0.03,
-                          delayChildren: linkIndex * 0.05
                         }
+                      },
+                      exit: {
+                        opacity: 0,
+                        transition: { duration: 0.3 }
                       }
                     }}
                     className={`text-5xl md:text-7xl font-black tracking-tighter uppercase font-roboto-condensed flex overflow-hidden translate-x-0 transition-opacity duration-300 text-foreground ${

@@ -21,7 +21,7 @@ function CreativePricing({
     tiers,
 }: {
     tag?: string;
-    title?: string;
+    title?: React.ReactNode;
     description?: string;
     tiers: PricingTier[];
 }) {
@@ -32,14 +32,14 @@ function CreativePricing({
                 <div className="font-roboto-condensed font-bold uppercase tracking-[0.2em] text-sm text-orange-500 mb-2">
                     {tag}
                 </div>
-                <div className="relative pb-4 overflow-visible">
-                    <h2 className="relative text-3xl sm:text-4xl md:text-5xl font-black font-cabinet text-foreground rotate-[-1deg] tracking-tighter overflow-visible">
+                <div className="relative pb-4 overflow-visible flex justify-center">
+                    <h2 className="relative text-3xl sm:text-4xl md:text-5xl font-black font-cabinet text-foreground rotate-[-1deg] tracking-tighter overflow-visible inline-block">
                         {title}
                         {/* Stars — visible on all screens */}
-                        <div className="absolute -right-10 top-0 text-amber-500 rotate-12 text-3xl md:text-4xl">
+                        <div className="absolute -right-3 top-0 md:-right-20 lg:-right-30 text-amber-500 rotate-12 text-3xl md:text-4xl">
                             ✨
                         </div>
-                        <div className="absolute -left-7 bottom-0 text-blue-500 -rotate-12 text-3xl md:text-4xl">
+                        <div className="absolute -left-5 md:-left-20 lg:-left-30 bottom-0 text-blue-500 -rotate-12 text-3xl md:text-4xl">
                             ⭐️
                         </div>
                     </h2>

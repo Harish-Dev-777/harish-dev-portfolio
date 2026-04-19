@@ -57,7 +57,7 @@ export const TypographyHero = ({
   if (!mounted) return null;
 
   return (
-    <div className="sticky top-0 z-10 flex h-[100dvh] w-full flex-col overflow-hidden bg-background text-foreground font-roboto-condensed selection:bg-orange-200">
+    <div className="sticky top-0 z-10 flex h-screen w-full flex-col overflow-hidden bg-background text-foreground font-roboto-condensed selection:bg-orange-200">
       {/* 
         This wrapper applies the scroll-based Recession Transform 
         to all hero content for a smoother parallax feel.
@@ -149,7 +149,7 @@ export const TypographyHero = ({
         {/* CTA & UI ELEMENTS */}
         <div className="absolute bottom-12 z-[60] flex w-80 md:w-[500px] left-[47%] -translate-x-1/2 justify-center px-4 gap-4 md:gap-6">
           <motion.a
-            href="#"
+            href="#contact"
             initial={{ opacity: 0, y: 20 }}
             animate={{
               opacity: 1,
@@ -188,8 +188,8 @@ export const TypographyHero = ({
       </motion.div>
 
       {/* MOBILE */}
-      <div className="md:hidden flex flex-col h-[100dvh] w-full pl-12 pr-6 pt-24 pb-0 bg-background overflow-hidden relative">
-        <div className="flex flex-col items-center pt-8 pb-0 z-10">
+      <div className="md:hidden flex flex-col h-full w-full pl-12 pr-6 pt-24 pb-0 bg-background overflow-hidden relative">
+        <div className="flex flex-col items-center pt-8 pb-0 z-10 w-full">
           <p className="text-xs md:text-sm font-medium text-foreground tracking-wide text-center">
             Hi👋, my name is <span className="text-orange-500">Harish</span> and
             I'm a <span className="text-orange-500">freelancer</span>.
@@ -227,7 +227,7 @@ export const TypographyHero = ({
           </div>
         </div>
 
-        <div className="relative w-full h-[70dvh] flex flex-col items-center justify-end mt-auto">
+        <div className="relative w-full flex-1 min-h-0 flex flex-col items-center justify-end mt-4">
           <img
             src={imageSrc}
             className="h-full w-auto object-contain object-bottom filter grayscale contrast-[1.1] relative bottom-0 -translate-x-4"
