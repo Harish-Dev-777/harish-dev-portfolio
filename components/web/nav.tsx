@@ -129,7 +129,7 @@ export const Nav = () => {
                         }
                       }
                     }}
-                    className={`text-5xl md:text-7xl font-black tracking-tighter uppercase font-roboto-condensed flex overflow-hidden translate-x-0 transition-opacity duration-300 ${
+                    className={`text-5xl md:text-7xl font-black tracking-tighter uppercase font-roboto-condensed flex overflow-hidden translate-x-0 transition-opacity duration-300 text-foreground ${
                       isActive ? "opacity-30" : "hover:translate-x-4"
                     }`}
                   >

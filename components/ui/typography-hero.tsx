@@ -53,9 +53,8 @@ export const TypographyHero = ({
 
   const inverseSpringX = useTransform(springX, (val) => -val);
 
-
   const isDark = theme === "dark";
-  
+
   // ── Transparent Stroke Overlay Logic ──
   // Reveals the image through the letters using color: transparent + stroke.
   const strokeColorH1 = isDark ? "#fff" : "#000";
@@ -88,25 +87,27 @@ export const TypographyHero = ({
   if (!mounted) return null;
 
   return (
-    <div
-      className="sticky top-0 z-10 flex h-[100dvh] w-full flex-col overflow-hidden bg-background text-foreground font-roboto-condensed selection:bg-orange-200"
-    >
+    <div className="sticky top-0 z-10 flex h-[100dvh] w-full flex-col overflow-hidden bg-background text-foreground font-roboto-condensed selection:bg-orange-200">
       {/* 
         This wrapper applies the scroll-based Recession Transform 
         to all hero content for a smoother parallax feel.
       */}
-      <motion.div 
-        className="relative flex-grow w-full hidden md:flex flex-col pt-24 pb-12"
-      >
+      <motion.div className="relative flex-grow w-full hidden md:flex flex-col pt-24 pb-12">
         {/* TOP GREETING */}
         <div className="absolute top-[12%] md:top-[13%] w-full flex justify-center z-50 pointer-events-none">
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.0, delay: 2.2, type: "spring", bounce: 0.4 }}
+            transition={{
+              duration: 1.0,
+              delay: 2.2,
+              type: "spring",
+              bounce: 0.4,
+            }}
             className="text-lg md:text-2xl lg:text-3xl text-foreground font-medium tracking-tight font-roboto-condensed pointer-events-auto"
           >
-            Hi👋, my name is <span className="text-orange-500">Harish</span> and I'm a <span className="text-orange-500">freelancer</span>.
+            Hi👋, my name is <span className="text-orange-500">Harish</span> and
+            I'm a <span className="text-orange-500">freelancer</span>.
           </motion.div>
         </div>
 
@@ -181,23 +182,29 @@ export const TypographyHero = ({
             style={maskStyle}
             className="absolute inset-0 flex flex-col items-center justify-center px-4"
           >
-             {/* 
+            {/* 
                The text inside the masked layer must move inversely to 
                the parent springX to remain visually static, 
                allowing the mask to "slide" over it correctly.
              */}
-             <motion.div 
-               style={{ x: inverseSpringX }}
-               className="flex flex-col items-center"
-             >
+            <motion.div
+              style={{ x: inverseSpringX }}
+              className="flex flex-col items-center"
+            >
               <h1
-                style={{ ...hoverTextStyleH1, opacity: hoveredHeading === 1 ? 0.9 : 0 }}
+                style={{
+                  ...hoverTextStyleH1,
+                  opacity: hoveredHeading === 1 ? 0.9 : 0,
+                }}
                 className="text-[12vw] leading-[0.8] font-black tracking-[-0.05em] font-roboto-condensed transition-opacity duration-300"
               >
                 {heading1}
               </h1>
               <h1
-                style={{ ...hoverTextStyleH2, opacity: hoveredHeading === 2 ? 0.9 : 0 }}
+                style={{
+                  ...hoverTextStyleH2,
+                  opacity: hoveredHeading === 2 ? 0.9 : 0,
+                }}
                 className="text-[12vw] leading-[0.8] font-black tracking-[-0.05em] font-roboto-condensed transition-opacity duration-300"
               >
                 {heading2}
@@ -213,7 +220,8 @@ export const TypographyHero = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{
               opacity: 1,
-              flex: hoveredCTA === "left" ? 1.2 : hoveredCTA === "right" ? 0.8 : 1,
+              flex:
+                hoveredCTA === "left" ? 1.2 : hoveredCTA === "right" ? 0.8 : 1,
             }}
             transition={{ flex: { duration: 0.4, ease: "easeOut" } }}
             onMouseEnter={() => setHoveredCTA("left")}
@@ -227,7 +235,8 @@ export const TypographyHero = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{
               opacity: 1,
-              flex: hoveredCTA === "right" ? 1.2 : hoveredCTA === "left" ? 0.8 : 1,
+              flex:
+                hoveredCTA === "right" ? 1.2 : hoveredCTA === "left" ? 0.8 : 1,
             }}
             transition={{ flex: { duration: 0.4, ease: "easeOut" } }}
             onMouseEnter={() => setHoveredCTA("right")}
@@ -253,8 +262,9 @@ export const TypographyHero = ({
       {/* MOBILE */}
       <div className="md:hidden flex flex-col h-screen w-full px-6 pt-16 pb-0 bg-background overflow-hidden relative">
         <div className="flex flex-col items-center pt-8 pb-2">
-           <p className="text-sm font-medium text-foreground tracking-wide text-center">
-            Hi👋, my name is <span className="text-orange-500">Harish</span> and I'm a <span className="text-orange-500">freelancer</span>.
+          <p className="text-sm font-medium text-foreground tracking-wide text-center">
+            Hi👋, my name is <span className="text-orange-500">Harish</span> and
+            I'm a <span className="text-orange-500">freelancer</span>.
           </p>
           <h1 className="text-[14vw] leading-[1] font-black tracking-tighter font-roboto-condensed text-foreground whitespace-nowrap">
             {heading1}
@@ -283,13 +293,27 @@ export const TypographyHero = ({
             </a>
           </div>
         </div>
-        
+
         <div className="relative w-full h-[45vh] flex flex-col items-center justify-end">
-          <img src={imageSrc} className="h-full w-auto object-contain object-bottom filter grayscale contrast-[1.1]" />
-          
+          <img
+            src={imageSrc}
+            className="h-full w-auto object-contain object-bottom filter grayscale contrast-[1.1]"
+          />
+
           {/* MOBILE SOCIAL ICONS (Bottom-Left Vertical) */}
           <div className="absolute left-2 bottom-12 z-50">
-            <SocialLinks vertical={true} className="gap-1.5 px-0 py-0 scale-90 origin-bottom-left" />
+            <SocialLinks
+              vertical={true}
+              className="gap-1.5 px-0 py-0 scale-90 origin-bottom-left"
+            />
+          </div>
+
+          {/* MOBILE SOCIAL ICONS (Bottom-Left Vertical) */}
+          <div className="absolute left-2 bottom-12 z-50">
+            <SocialLinks
+              vertical={true}
+              className="gap-1.5 px-0 py-0 scale-90 origin-bottom-left"
+            />
           </div>
         </div>
       </div>

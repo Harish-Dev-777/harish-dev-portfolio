@@ -7,7 +7,7 @@ const page = () => {
     <main className="relative bg-background">
       {/* Sticky Hero Section */}
       <Hero />
-      
+
       {/* Sections that slide over the Hero */}
       <div className="relative z-[50] bg-background">
         <BrandPositioning />
