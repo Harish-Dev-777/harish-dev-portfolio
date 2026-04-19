@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -131,9 +133,19 @@ function CreativePricing({
                                 ))}
                             </div>
 
-                            {/* CTA */}
+                             {/* CTA */}
                             <div className="mt-auto">
                                 <Button
+                                    onClick={() => {
+                                        const contactSection = document.getElementById("contact");
+                                        if (contactSection) {
+                                            contactSection.scrollIntoView({ behavior: "smooth" });
+                                            // Focus the input after the scroll animation roughly completes
+                                            setTimeout(() => {
+                                                document.getElementById("contact-name-input")?.focus();
+                                            }, 800);
+                                        }
+                                    }}
                                     className={cn(
                                         "w-full h-12 md:h-10 font-roboto-condensed font-bold uppercase tracking-widest text-sm relative",
                                         "border-2 border-foreground",

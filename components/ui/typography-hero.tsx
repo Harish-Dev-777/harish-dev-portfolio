@@ -85,7 +85,7 @@ export const TypographyHero = ({
           ─── LAYER 1 (Z-10): SOLID TEXT ───
           Stays static (no mouse parallax).
         */}
-        <div className="absolute inset-0 z-10 flex w-full flex-col items-center justify-center pointer-events-none select-none">
+        <div className="absolute inset-0 z-10 flex w-full flex-col items-center justify-center pointer-events-none select-none md:pr-[6vw]">
           <div className="flex flex-col items-center translate-y-[12%]">
             <motion.h1
               initial={{ x: "-80vw", opacity: 0 }}
@@ -127,7 +127,7 @@ export const TypographyHero = ({
           ─── LAYER 2 (Z-20): IMAGE ───
           Includes dynamic cursor parallax.
         */}
-        <div className="absolute inset-0 z-20 flex w-full justify-center pointer-events-none items-end">
+        <div className="absolute inset-0 z-20 flex w-full justify-center pointer-events-none items-end md:pr-[6vw]">
           <motion.div
             style={{ x: springX }}
             initial={{ opacity: 0, scale: 0.9, y: 50 }}
@@ -147,7 +147,7 @@ export const TypographyHero = ({
 
 
         {/* CTA & UI ELEMENTS */}
-        <div className="absolute bottom-12 z-[60] flex w-80 md:w-[500px] left-1/2 -translate-x-1/2 justify-center px-4 gap-4 md:gap-6">
+        <div className="absolute bottom-12 z-[60] flex w-80 md:w-[500px] left-[47%] -translate-x-1/2 justify-center px-4 gap-4 md:gap-6">
           <motion.a
             href="#"
             initial={{ opacity: 0, y: 20 }}
@@ -188,28 +188,28 @@ export const TypographyHero = ({
       </motion.div>
 
       {/* MOBILE */}
-      <div className="md:hidden flex flex-col h-[100dvh] w-full pl-12 pr-6 pt-20 pb-0 bg-background overflow-hidden relative">
-        <div className="flex flex-col items-center pt-4 pb-0 z-10">
-          <p className="text-sm font-medium text-foreground tracking-wide text-center">
+      <div className="md:hidden flex flex-col h-[100dvh] w-full pl-12 pr-6 pt-24 pb-0 bg-background overflow-hidden relative">
+        <div className="flex flex-col items-center pt-8 pb-0 z-10">
+          <p className="text-xs md:text-sm font-medium text-foreground tracking-wide text-center">
             Hi👋, my name is <span className="text-orange-500">Harish</span> and
             I'm a <span className="text-orange-500">freelancer</span>.
           </p>
-          <h1 className="text-[14vw] leading-[1] font-black tracking-tighter font-roboto-condensed text-foreground whitespace-nowrap">
+          <h1 className="text-[12vw] leading-[1] font-black tracking-tighter font-roboto-condensed text-foreground whitespace-nowrap">
             {heading1}
           </h1>
-          <h1 className="text-[14vw] leading-[0.8] font-black tracking-tighter font-roboto-condensed text-orange-500 whitespace-nowrap">
+          <h1 className="text-[12vw] leading-[0.8] font-black tracking-tighter font-roboto-condensed text-orange-500 whitespace-nowrap">
             {heading2}
           </h1>
 
-          <div className="text-xs text-foreground/70 font-light mt-4 text-center uppercase tracking-[0.2em]">
+          <div className="text-[10px] sm:text-xs text-foreground/70 font-light mt-3 text-center uppercase tracking-[0.2em]">
             {location}
           </div>
 
           {/* MOBILE CTAs */}
-          <div className="flex flex-col w-full gap-2 mt-1">
+          <div className="flex flex-col w-full gap-2 mt-6">
             <a
-              href="#"
-              className="w-full bg-orange-500 text-white py-3 text-sm font-bold font-roboto-condensed text-center rounded-sm shadow-lg shadow-orange-500/20"
+              href="#contact"
+              className="w-full bg-orange-500 text-white py-2.5 text-xs sm:text-sm font-bold font-roboto-condensed text-center rounded-sm shadow-lg shadow-orange-500/20"
             >
               {leftButton}
             </a>
@@ -220,14 +220,14 @@ export const TypographyHero = ({
                   element.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="w-full bg-transparent text-foreground py-3 text-sm font-bold font-roboto-condensed text-center border border-orange-500 rounded-sm"
+              className="w-full bg-transparent text-foreground py-2.5 text-xs sm:text-sm font-bold font-roboto-condensed text-center border border-orange-500 rounded-sm"
             >
               {rightButton}
             </button>
           </div>
         </div>
 
-        <div className="relative w-full h-[75dvh] flex flex-col items-center justify-end mt-auto">
+        <div className="relative w-full h-[70dvh] flex flex-col items-center justify-end mt-auto">
           <img
             src={imageSrc}
             className="h-full w-auto object-contain object-bottom filter grayscale contrast-[1.1] relative bottom-0 -translate-x-4"

@@ -9,6 +9,7 @@ import { About } from "@/components/web/about";
 import { TechStackScroll } from "@/components/web/tech-stack-scroll";
 import { ServicesSection } from "@/components/web/services-section";
 import { ContactSection } from "@/components/web/contact-section";
+import { FAQSection } from "@/components/web/faq-section";
 import { Footer } from "@/components/web/footer";
 
 const page = () => {
@@ -41,6 +42,7 @@ const page = () => {
           <PricingSection />
         </section>
 
+        <FAQSection />
         <ContactSection />
         <Footer />
       </div>

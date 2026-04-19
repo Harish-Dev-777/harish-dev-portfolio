@@ -91,6 +91,7 @@ export const ContactSection = () => {
             <div className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] leading-[2.2] md:leading-[2] font-poppins font-light text-foreground/80">
               <span>My name is </span>
               <input
+                id="contact-name-input"
                 type="text"
                 name="name"
                 value={formData.name}

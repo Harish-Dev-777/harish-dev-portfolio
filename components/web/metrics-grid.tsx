@@ -35,11 +35,11 @@ export const MetricsGrid = () => {
         </p>
       </div>
 
-      <div className="w-full flex flex-col justify-center mt-8 space-y-0 md:space-y-4">
+      <div className="w-full flex flex-col justify-center mt-6 space-y-0 text-center md:text-left">
         {METRICS.map((metric, i) => (
           <div
             key={metric.label}
-            className="relative w-full pl-16 pr-6 md:pl-[12vw] md:pr-16 lg:pl-[15vw] lg:pr-24 flex items-center justify-between group py-4 md:py-8 border-b border-foreground/5 last:border-b-0"
+            className="relative w-full pl-16 pr-6 md:pl-[12vw] md:pr-16 lg:pl-[15vw] lg:pr-24 flex items-center justify-between group py-3 md:py-4 border-b border-foreground/5 last:border-b-0"
           >
             {/* Stage 1: Horizontal Orange Line appears full width immediately */}
             <motion.div
