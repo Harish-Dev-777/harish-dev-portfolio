@@ -27,7 +27,7 @@ export const MetricsGrid = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section className="w-full h-screen bg-background flex flex-col justify-center overflow-hidden border-t border-foreground/5 relative">
+    <section className="w-full min-h-screen py-24 md:py-32 bg-background flex flex-col justify-center overflow-hidden border-t border-foreground/5 relative">
       {/* Section Label - Moved higher up */}
       <div className="absolute top-12 left-0 pl-16 pr-6 md:pl-[12vw] lg:pl-[15vw] z-50">
          <p className="text-sm md:text-base font-medium tracking-[0.2em] uppercase text-foreground/40">
@@ -35,11 +35,11 @@ export const MetricsGrid = () => {
         </p>
       </div>
 
-      <div className="w-full h-[80vh] md:h-[85vh] flex flex-col justify-center mt-8">
+      <div className="w-full flex flex-col justify-center mt-8 space-y-0 md:space-y-4">
         {METRICS.map((metric, i) => (
           <div
             key={metric.label}
-            className="relative w-full pl-16 pr-6 md:pl-[12vw] md:pr-16 lg:pl-[15vw] lg:pr-24 flex items-center justify-between group flex-1 border-b border-foreground/5 last:border-b-0"
+            className="relative w-full pl-16 pr-6 md:pl-[12vw] md:pr-16 lg:pl-[15vw] lg:pr-24 flex items-center justify-between group py-4 md:py-8 border-b border-foreground/5 last:border-b-0"
           >
             {/* Stage 1: Horizontal Orange Line appears full width immediately */}
             <motion.div
@@ -70,7 +70,7 @@ export const MetricsGrid = () => {
               >
                 <RevealText
                   text={metric.label}
-                  className={`text-[12vw] md:text-[14vw] lg:text-[18vh] font-black font-cabinet tracking-tight leading-none uppercase transition-colors duration-500 delay-100 ${
+                  className={`text-[12vw] md:text-[12vw] lg:text-[14vh] font-black font-cabinet tracking-tight leading-none uppercase transition-colors duration-500 delay-100 ${
                     hoveredIndex === i ? "text-black" : "text-foreground"
                   }`}
                 />

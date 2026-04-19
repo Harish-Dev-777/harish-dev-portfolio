@@ -90,9 +90,9 @@ const IntroTransition = () => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.4 } }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="absolute bottom-16 right-16 z-[10000]"
+            className="absolute bottom-4 right-4 md:bottom-16 md:right-16 z-[10000]"
           >
-            <Logo isWhite className="text-8xl" />
+            <Logo isWhite className="text-5xl md:text-8xl" />
           </motion.div>
         )}
       </AnimatePresence>

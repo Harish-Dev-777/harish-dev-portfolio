@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Roboto_Condensed, Caveat } from "next/font/google";
+import { Roboto_Condensed, Caveat, Poppins } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -10,6 +10,12 @@ const robotoCondensed = Roboto_Condensed({
 
 const caveat = Caveat({
   variable: "--font-handwritten",
+  subsets: ["latin"],
+});
+
+const poppins = Poppins({
+  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
 
@@ -54,6 +60,7 @@ import { ThemeProvider } from "../components/theme-provider";
 import IntroTransition from "@/components/web/intro-transition";
 import ThemeSwitch from "@/components/ui/theme-switch";
 import { ScrollSocials } from "@/components/web/scroll-socials";
+import { MusicToggle } from "@/components/web/music-toggle";
 
 export default function RootLayout({
   children,
@@ -64,7 +71,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${cabinet.variable} ${robotoCondensed.variable} ${caveat.variable} h-full antialiased`}
+      className={`${cabinet.variable} ${robotoCondensed.variable} ${caveat.variable} ${poppins.variable} h-full antialiased`}
     >
       <head>
         <script
@@ -92,7 +99,8 @@ export default function RootLayout({
           {children}
           {/* Global UI Elements */}
           <ScrollSocials />
-          <div className="fixed bottom-8 right-8 z-[100]">
+          <div className="fixed bottom-8 right-8 z-[100] flex flex-col items-center space-y-4">
+            <MusicToggle />
             <ThemeSwitch />
           </div>
         </ThemeProvider>

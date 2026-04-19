@@ -8,10 +8,11 @@ import { useTheme } from '@/components/theme-provider';
 import { cn } from '@/lib/utils';
 
 const LINKS = [
-  { label: 'Home', href: '#' },
-  { label: 'About me', href: '#' },
-  { label: 'Services', href: '#' },
-  { label: 'Contact', href: '#' },
+  { label: 'Home', href: '#hero' },
+  { label: 'About me', href: '#about' },
+  { label: 'Services', href: '#services' },
+  { label: 'Pricing', href: '#pricing' },
+  { label: 'Contact', href: '#contact' },
 ];
 
 export const Nav = () => {
@@ -27,6 +28,19 @@ export const Nav = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      setIsOpen(false);
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
 
   return (
     <>
@@ -45,7 +59,8 @@ export const Nav = () => {
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
-        className="z-[121]"
+        className="z-[121] cursor-pointer"
+        onClick={(e) => handleNavClick(e, '#hero')}
       >
         <Logo isWhite={isDark} className="text-4xl" />
       </motion.div>
@@ -56,6 +71,7 @@ export const Nav = () => {
           <motion.a
             key={link.label}
             href={link.href}
+            onClick={(e) => handleNavClick(e, link.href)}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
@@ -121,7 +137,7 @@ export const Nav = () => {
                   <motion.a
                     key={link.label}
                     href={link.href}
-                    onClick={() => setIsOpen(false)}
+                    onClick={(e) => handleNavClick(e, link.href)}
                     variants={{
                       hidden: { opacity: 0 },
                       show: { 

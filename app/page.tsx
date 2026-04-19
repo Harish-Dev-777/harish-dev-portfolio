@@ -8,24 +8,41 @@ import { PricingSection } from "@/components/web/pricing-section";
 import { About } from "@/components/web/about";
 import { TechStackScroll } from "@/components/web/tech-stack-scroll";
 import { ServicesSection } from "@/components/web/services-section";
+import { ContactSection } from "@/components/web/contact-section";
+import { Footer } from "@/components/web/footer";
 
 const page = () => {
   return (
     <main className="relative bg-background">
       {/* Sticky Hero Section */}
-      <Hero />
+      <section id="hero">
+        <Hero />
+      </section>
 
       {/* Sections that slide over the Hero */}
       <div className="relative z-[50] bg-background">
         <TechStackScroll />
         <BrandPositioning />
         <MetricsGrid />
-        <About />
-        <ServicesSection />
+        
+        <section id="about">
+          <About />
+        </section>
+
+        <section id="services">
+          <ServicesSection />
+        </section>
+
         <MyGoal />
         <Projects />
         <VelocityScroll />
-        <PricingSection />
+
+        <section id="pricing">
+          <PricingSection />
+        </section>
+
+        <ContactSection />
+        <Footer />
       </div>
     </main>
   );

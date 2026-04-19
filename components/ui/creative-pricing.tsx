@@ -27,7 +27,7 @@ function CreativePricing({
         <div className="w-full max-w-5xl mx-auto px-5 md:px-4">
             {/* Header */}
             <div className="text-center mb-8 md:mb-8">
-                <div className="font-handwritten text-lg md:text-xl text-orange-500 rotate-[-1deg] mb-2">
+                <div className="font-roboto-condensed font-bold uppercase tracking-[0.2em] text-sm text-orange-500 mb-2">
                     {tag}
                 </div>
                 <div className="relative pb-4 overflow-visible">
@@ -43,7 +43,7 @@ function CreativePricing({
                     </h2>
                     <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-36 h-2 bg-orange-500/20 rotate-[-1deg] rounded-full blur-sm" />
                 </div>
-                <p className="font-handwritten text-base md:text-lg text-muted-foreground rotate-[-1deg] mt-5">
+                <p className="font-roboto-condensed text-sm md:text-base text-muted-foreground uppercase tracking-wider mt-5 max-w-lg mx-auto leading-relaxed">
                     {description}
                 </p>
             </div>
@@ -52,7 +52,7 @@ function CreativePricing({
                 Mobile  — full-width single column, each card is ~80vh so one appears per view
                 Desktop — 2 columns, compact side-by-side
             */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-6 w-full max-w-sm md:max-w-2xl mx-auto items-stretch">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-6 w-full max-w-xs md:max-w-2xl mx-auto items-stretch">
                 {tiers.map((tier, index) => (
                     <div
                         key={tier.name}
@@ -101,7 +101,7 @@ function CreativePricing({
                                     <h3 className="font-cabinet font-black text-xl md:text-lg text-foreground leading-tight">
                                         {tier.name}
                                     </h3>
-                                    <p className="font-handwritten text-base md:text-sm text-muted-foreground leading-tight">
+                                    <p className="font-roboto-condensed text-xs md:text-xs text-muted-foreground leading-tight uppercase tracking-wider mt-1 opacity-70">
                                         {tier.description}
                                     </p>
                                 </div>
@@ -112,7 +112,7 @@ function CreativePricing({
                                 <span className="text-4xl md:text-3xl font-black text-foreground">
                                     {tier.price}
                                 </span>
-                                <span className="text-muted-foreground ml-2 font-handwritten text-base md:text-sm">
+                                <span className="text-muted-foreground ml-2 font-roboto-condensed font-bold text-xs uppercase tracking-widest opacity-60">
                                     / fixed
                                 </span>
                             </div>
@@ -124,7 +124,7 @@ function CreativePricing({
                                         <div className="w-5 h-5 md:w-4 md:h-4 rounded-full border-2 border-foreground flex items-center justify-center shrink-0">
                                             <Check className="w-3 h-3 md:w-2.5 md:h-2.5 text-foreground" strokeWidth={3} />
                                         </div>
-                                        <span className="font-handwritten text-lg md:text-base text-foreground">
+                                        <span className="font-roboto-condensed text-[13px] md:text-sm font-medium text-foreground/80">
                                             {feature}
                                         </span>
                                     </div>
@@ -135,7 +135,7 @@ function CreativePricing({
                             <div className="mt-auto">
                                 <Button
                                     className={cn(
-                                        "w-full h-12 md:h-10 font-handwritten text-lg md:text-base relative",
+                                        "w-full h-12 md:h-10 font-roboto-condensed font-bold uppercase tracking-widest text-sm relative",
                                         "border-2 border-foreground",
                                         "transition-all duration-300",
                                         "shadow-[3px_3px_0px_0px] shadow-foreground",

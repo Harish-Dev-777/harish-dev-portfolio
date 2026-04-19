@@ -188,8 +188,8 @@ export const TypographyHero = ({
       </motion.div>
 
       {/* MOBILE */}
-      <div className="md:hidden flex flex-col h-screen w-full pl-12 pr-6 pt-16 pb-0 bg-background overflow-hidden relative">
-        <div className="flex flex-col items-center pt-8 pb-2">
+      <div className="md:hidden flex flex-col h-[100dvh] w-full pl-12 pr-6 pt-20 pb-0 bg-background overflow-hidden relative">
+        <div className="flex flex-col items-center pt-4 pb-0 z-10">
           <p className="text-sm font-medium text-foreground tracking-wide text-center">
             Hi👋, my name is <span className="text-orange-500">Harish</span> and
             I'm a <span className="text-orange-500">freelancer</span>.
@@ -201,15 +201,15 @@ export const TypographyHero = ({
             {heading2}
           </h1>
 
-          <div className="text-sm text-foreground/70 font-light tracking-tight mt-6 text-center uppercase tracking-[0.2em]">
+          <div className="text-xs text-foreground/70 font-light mt-4 text-center uppercase tracking-[0.2em]">
             {location}
           </div>
 
           {/* MOBILE CTAs */}
-          <div className="flex flex-col w-full gap-3 mt-4">
+          <div className="flex flex-col w-full gap-2 mt-1">
             <a
               href="#"
-              className="w-full bg-orange-500 text-white py-4 text-base font-bold font-roboto-condensed text-center rounded-sm shadow-lg shadow-orange-500/20"
+              className="w-full bg-orange-500 text-white py-3 text-sm font-bold font-roboto-condensed text-center rounded-sm shadow-lg shadow-orange-500/20"
             >
               {leftButton}
             </a>
@@ -220,17 +220,17 @@ export const TypographyHero = ({
                   element.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="w-full bg-transparent text-foreground py-4 text-base font-bold font-roboto-condensed text-center border border-orange-500 rounded-sm"
+              className="w-full bg-transparent text-foreground py-3 text-sm font-bold font-roboto-condensed text-center border border-orange-500 rounded-sm"
             >
               {rightButton}
             </button>
           </div>
         </div>
 
-        <div className="relative w-full h-[55vh] flex flex-col items-center justify-end mt-auto">
+        <div className="relative w-full h-[75dvh] flex flex-col items-center justify-end mt-auto">
           <img
             src={imageSrc}
-            className="h-full w-auto object-contain object-bottom filter grayscale contrast-[1.1] relative bottom-[3vh] -translate-x-4"
+            className="h-full w-auto object-contain object-bottom filter grayscale contrast-[1.1] relative bottom-0 -translate-x-4"
             alt="Hero Portrait Mobile"
           />
         </div>

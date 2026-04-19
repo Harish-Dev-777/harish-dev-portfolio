@@ -156,15 +156,14 @@ const MenuItem: React.FC<MenuItemProps> = ({
       ref={itemRef}
       style={{ borderTop: isFirst ? 'none' : `1px solid ${borderColor}` }}
     >
-      <a
-        className="flex items-center justify-start pl-16 md:pl-[12vw] lg:pl-[15vw] h-full relative cursor-pointer uppercase no-underline font-black text-[3.5vh] md:text-[6vh] tracking-tighter"
-        href={link}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+      <div
+        className="flex items-center justify-start pl-16 md:pl-[12vw] lg:pl-[15vw] h-full relative cursor-default uppercase no-underline font-black text-[3.5vh] md:text-[6vh] tracking-tighter"
+        onMouseEnter={(ev: any) => handleMouseEnter(ev)}
+        onMouseLeave={(ev: any) => handleMouseLeave(ev)}
         style={{ color: textColor }}
       >
         {text}
-      </a>
+      </div>
       <div
         className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none translate-y-[101%]"
         ref={marqueeRef}
