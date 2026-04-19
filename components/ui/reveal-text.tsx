@@ -24,31 +24,47 @@ export const RevealText = ({
   });
 
   const words = text.split(" ");
+  const totalLength = text.length;
+  let charGlobalIndex = 0;
 
   return (
     <div ref={containerRef} className={cn("relative flex flex-wrap", className)}>
       {words.map((word, i) => {
-        const start = i / words.length;
-        const end = (i + 1) / words.length;
-        const isHighlighted = highlightedWords.some(h => word.toLowerCase().includes(h.toLowerCase()));
+        const isHighlighted = highlightedWords.some(h => 
+          word.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "").includes(h.toLowerCase())
+        );
+        
+        const wordChars = word.split("");
         
         return (
-          <Word 
-            key={i} 
-            progress={scrollYProgress} 
-            range={[start, end]}
-            isHighlighted={isHighlighted}
-            highlightClassName={highlightClassName}
-          >
-            {word}
-          </Word>
+          <span key={i} className="flex flex-nowrap mr-[0.25rem] mb-[0.1em]">
+            {wordChars.map((char, j) => {
+              const start = charGlobalIndex / totalLength;
+              const end = (charGlobalIndex + 1) / totalLength;
+              charGlobalIndex++;
+
+              return (
+                <Char 
+                  key={j} 
+                  progress={scrollYProgress} 
+                  range={[start, end]}
+                  isHighlighted={isHighlighted}
+                  highlightClassName={highlightClassName}
+                >
+                  {char}
+                </Char>
+              );
+            })}
+            {/* Account for the space between words in the global timing */}
+            {i < words.length - 1 && <span className="hidden">{charGlobalIndex++}</span>}
+          </span>
         );
       })}
     </div>
   );
 };
 
-interface WordProps {
+interface CharProps {
   children: string;
   progress: MotionValue<number>;
   range: [number, number];
@@ -56,12 +72,12 @@ interface WordProps {
   highlightClassName?: string;
 }
 
-const Word = ({ children, progress, range, isHighlighted, highlightClassName }: WordProps) => {
+const Char = ({ children, progress, range, isHighlighted, highlightClassName }: CharProps) => {
   const opacity = useTransform(progress, range, [0.15, 1]);
   
   return (
-    <span className="relative mr-[0.25em] mb-[0.1em]">
-      {/* Background/Base text layer */}
+    <span className="relative inline-block whitespace-pre">
+      {/* Background layer */}
       <span className={cn("absolute opacity-[0.08] select-none", isHighlighted && highlightClassName)}>
         {children}
       </span>

@@ -29,12 +29,13 @@ export const Nav = () => {
   }, []);
 
   return (
-    <motion.nav 
-      initial={{ y: -100 }}
+    <>
+      <motion.nav 
+        initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 flex w-full max-w-screen-2xl mx-auto items-center justify-between px-8 py-6 md:px-12 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-[120] flex w-full max-w-screen-2xl mx-auto items-center justify-between px-8 py-6 md:px-12 transition-all duration-300",
         scrolled 
           ? "bg-background/70 backdrop-blur-xl border-b border-foreground/5 shadow-sm" 
           : "bg-transparent py-8"
@@ -44,7 +45,7 @@ export const Nav = () => {
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
-        className="z-50"
+        className="z-[121]"
       >
         <Logo isWhite={isDark} className="text-4xl" />
       </motion.div>
@@ -67,7 +68,9 @@ export const Nav = () => {
 
       <MobileToggle isOpen={isOpen} setIsOpen={setIsOpen} />
 
-      {/* Fullscreen Mobile Menu */}
+      </motion.nav>
+
+      {/* Fullscreen Mobile Menu - Moved outside transform context */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -87,7 +90,7 @@ export const Nav = () => {
               duration: 0.8, 
               ease: [0.76, 0, 0.24, 1] 
             }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-background/95 backdrop-blur-xl"
+            className="fixed inset-0 z-[110] flex flex-col items-center justify-center bg-background/95 backdrop-blur-xl"
           >
             <motion.div 
               variants={{
@@ -166,6 +169,6 @@ export const Nav = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   );
 };

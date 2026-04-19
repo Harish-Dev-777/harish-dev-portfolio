@@ -29,7 +29,6 @@ export const TypographyHero = ({
   rightButton?: string;
 }) => {
   const [hoveredCTA, setHoveredCTA] = useState<"left" | "right" | null>(null);
-  const [hoveredHeading, setHoveredHeading] = useState<1 | 2 | null>(null);
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -45,7 +44,7 @@ export const TypographyHero = ({
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const xPercent = e.clientX / window.innerWidth - 0.5;
-      mouseX.set(xPercent * 100);
+      mouseX.set(xPercent * 250);
     };
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
@@ -54,35 +53,6 @@ export const TypographyHero = ({
   const inverseSpringX = useTransform(springX, (val) => -val);
 
   const isDark = theme === "dark";
-
-  // ── Transparent Stroke Overlay Logic ──
-  // Reveals the image through the letters using color: transparent + stroke.
-  const strokeColorH1 = isDark ? "#fff" : "#000";
-  const strokeColorH2 = "#f97316";
-
-  const hoverTextStyleH2: React.CSSProperties = {
-    color: "transparent",
-    WebkitTextStroke: `1px ${strokeColorH2}`,
-    opacity: 0.6,
-  };
-
-  const hoverTextStyleH1: React.CSSProperties = {
-    color: "transparent",
-    WebkitTextStroke: `1px ${strokeColorH1}`,
-    opacity: 0.6,
-  };
-
-  // Mask logic remains to synchronize with the person silhouette
-  const maskStyle: React.CSSProperties = {
-    maskImage: `url('${imageSrc}')`,
-    maskSize: "auto 90vh",
-    maskPosition: "center 40px",
-    maskRepeat: "no-repeat",
-    WebkitMaskImage: `url('${imageSrc}')`,
-    WebkitMaskSize: "auto 90vh",
-    WebkitMaskPosition: "center 40px",
-    WebkitMaskRepeat: "no-repeat",
-  };
 
   if (!mounted) return null;
 
@@ -94,7 +64,7 @@ export const TypographyHero = ({
       */}
       <motion.div className="relative flex-grow w-full hidden md:flex flex-col pt-24 pb-12">
         {/* TOP GREETING */}
-        <div className="absolute top-[12%] md:top-[13%] w-full flex justify-center z-50 pointer-events-none">
+        <div className="absolute top-[15%] md:top-[16%] w-full flex justify-center z-50 pointer-events-none">
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -107,7 +77,7 @@ export const TypographyHero = ({
             className="text-lg md:text-2xl lg:text-3xl text-foreground font-medium tracking-tight font-roboto-condensed pointer-events-auto"
           >
             Hi👋, my name is <span className="text-orange-500">Harish</span> and
-            I'm a <span className="text-orange-500">freelancer</span>.
+            I'm a <span className="text-orange-500">Freelancer</span>.
           </motion.div>
         </div>
 
@@ -116,34 +86,40 @@ export const TypographyHero = ({
           Stays static (no mouse parallax).
         */}
         <div className="absolute inset-0 z-10 flex w-full flex-col items-center justify-center pointer-events-none select-none">
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center translate-y-[12%]">
             <motion.h1
-              onMouseEnter={() => setHoveredHeading(1)}
-              onMouseLeave={() => setHoveredHeading(null)}
               initial={{ x: "-80vw", opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{
                 x: { duration: 1.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 },
                 opacity: { duration: 0.8, delay: 0.2 },
               }}
-              className="text-[12vw] leading-[0.8] font-black tracking-[-0.05em] font-roboto-condensed select-none text-foreground pointer-events-auto cursor-default"
+              className="text-[12vw] leading-[0.8] m-0 font-black tracking-[-0.05em] font-roboto-condensed select-none text-foreground pointer-events-auto cursor-default"
             >
               {heading1}
             </motion.h1>
 
             <motion.h1
-              onMouseEnter={() => setHoveredHeading(2)}
-              onMouseLeave={() => setHoveredHeading(null)}
               initial={{ x: "80vw", opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{
                 x: { duration: 1.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 },
                 opacity: { duration: 0.8, delay: 0.2 },
               }}
-              className="text-[12vw] leading-[0.8] font-black tracking-[-0.05em] font-roboto-condensed select-none text-orange-500 pointer-events-auto cursor-default"
+              className="text-[12vw] leading-[0.8] m-0 font-black tracking-[-0.05em] font-roboto-condensed select-none text-orange-500 pointer-events-auto cursor-default"
             >
               {heading2}
             </motion.h1>
+
+            {/* Desktop Location Placement - Aligned with start of Heading 2 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              className="mt-22 translate-x-[9vw] text-lg md:text-xl lg:text-2xl text-foreground font-lighter tracking-tight font-roboto-condensed pointer-events-auto self-start"
+            >
+              {location}
+            </motion.div>
           </div>
         </div>
 
@@ -168,50 +144,7 @@ export const TypographyHero = ({
           </motion.div>
         </div>
 
-        {/*
-          ─── LAYER 3 (Z-30): THE "HOVER" OVERLAY LAYER ───
-          REFINED: Using Transparent Fill + WebkitTextStroke for "Ghost" cutout feel.
-        */}
-        <motion.div
-          style={{ x: springX }}
-          animate={{ opacity: hoveredHeading !== null ? 1 : 0 }}
-          transition={{ opacity: { duration: 0.4, ease: "easeInOut" } }}
-          className="absolute inset-0 z-30 pointer-events-none select-none"
-        >
-          <div
-            style={maskStyle}
-            className="absolute inset-0 flex flex-col items-center justify-center px-4"
-          >
-            {/* 
-               The text inside the masked layer must move inversely to 
-               the parent springX to remain visually static, 
-               allowing the mask to "slide" over it correctly.
-             */}
-            <motion.div
-              style={{ x: inverseSpringX }}
-              className="flex flex-col items-center"
-            >
-              <h1
-                style={{
-                  ...hoverTextStyleH1,
-                  opacity: hoveredHeading === 1 ? 0.9 : 0,
-                }}
-                className="text-[12vw] leading-[0.8] font-black tracking-[-0.05em] font-roboto-condensed transition-opacity duration-300"
-              >
-                {heading1}
-              </h1>
-              <h1
-                style={{
-                  ...hoverTextStyleH2,
-                  opacity: hoveredHeading === 2 ? 0.9 : 0,
-                }}
-                className="text-[12vw] leading-[0.8] font-black tracking-[-0.05em] font-roboto-condensed transition-opacity duration-300"
-              >
-                {heading2}
-              </h1>
-            </motion.div>
-          </div>
-        </motion.div>
+
 
         {/* CTA & UI ELEMENTS */}
         <div className="absolute bottom-12 z-[60] flex w-80 md:w-[500px] left-1/2 -translate-x-1/2 justify-center px-4 gap-4 md:gap-6">
@@ -230,8 +163,13 @@ export const TypographyHero = ({
           >
             <span className="truncate px-4">{leftButton}</span>
           </motion.a>
-          <motion.a
-            href="#"
+          <motion.button
+            onClick={() => {
+              const element = document.getElementById("selected-projects");
+              if (element) {
+                element.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
             initial={{ opacity: 0, y: 20 }}
             animate={{
               opacity: 1,
@@ -244,23 +182,13 @@ export const TypographyHero = ({
             className="bg-transparent text-foreground py-3.5 text-sm md:text-base font-bold font-roboto-condensed hover:bg-orange-500/10 transition-colors duration-300 text-center border border-orange-500 rounded-sm flex items-center justify-center whitespace-nowrap overflow-hidden"
           >
             <span className="truncate px-4">{rightButton}</span>
-          </motion.a>
+          </motion.button>
         </div>
 
-        {/* Info & Socials */}
-        <div className="absolute bottom-[22%] w-full max-w-7xl px-8 md:px-12 z-[60] flex items-center justify-between pointer-events-none">
-          <div className="text-lg md:text-xl lg:text-2xl text-foreground font-lighter tracking-tight font-roboto-condensed pointer-events-auto">
-            {location}
-          </div>
-        </div>
-
-        <div className="absolute bottom-12 left-8 md:left-16 z-[60] pointer-events-auto">
-          <SocialLinks />
-        </div>
       </motion.div>
 
       {/* MOBILE */}
-      <div className="md:hidden flex flex-col h-screen w-full px-6 pt-16 pb-0 bg-background overflow-hidden relative">
+      <div className="md:hidden flex flex-col h-screen w-full pl-12 pr-6 pt-16 pb-0 bg-background overflow-hidden relative">
         <div className="flex flex-col items-center pt-8 pb-2">
           <p className="text-sm font-medium text-foreground tracking-wide text-center">
             Hi👋, my name is <span className="text-orange-500">Harish</span> and
@@ -285,36 +213,26 @@ export const TypographyHero = ({
             >
               {leftButton}
             </a>
-            <a
-              href="#"
+            <button
+              onClick={() => {
+                const element = document.getElementById("selected-projects");
+                if (element) {
+                  element.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
               className="w-full bg-transparent text-foreground py-4 text-base font-bold font-roboto-condensed text-center border border-orange-500 rounded-sm"
             >
               {rightButton}
-            </a>
+            </button>
           </div>
         </div>
 
-        <div className="relative w-full h-[45vh] flex flex-col items-center justify-end">
+        <div className="relative w-full h-[55vh] flex flex-col items-center justify-end mt-auto">
           <img
             src={imageSrc}
-            className="h-full w-auto object-contain object-bottom filter grayscale contrast-[1.1]"
+            className="h-full w-auto object-contain object-bottom filter grayscale contrast-[1.1] relative bottom-[3vh] -translate-x-4"
+            alt="Hero Portrait Mobile"
           />
-
-          {/* MOBILE SOCIAL ICONS (Bottom-Left Vertical) */}
-          <div className="absolute left-2 bottom-12 z-50">
-            <SocialLinks
-              vertical={true}
-              className="gap-1.5 px-0 py-0 scale-90 origin-bottom-left"
-            />
-          </div>
-
-          {/* MOBILE SOCIAL ICONS (Bottom-Left Vertical) */}
-          <div className="absolute left-2 bottom-12 z-50">
-            <SocialLinks
-              vertical={true}
-              className="gap-1.5 px-0 py-0 scale-90 origin-bottom-left"
-            />
-          </div>
         </div>
       </div>
     </div>
