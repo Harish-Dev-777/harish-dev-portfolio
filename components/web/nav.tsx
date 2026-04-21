@@ -8,7 +8,6 @@ import { useTheme } from '@/components/theme-provider';
 import { cn } from '@/lib/utils';
 
 const LINKS = [
-  { label: 'Home', href: '#hero' },
   { label: 'About me', href: '#about' },
   { label: 'Services', href: '#services' },
   { label: 'Pricing', href: '#pricing' },
@@ -22,6 +21,10 @@ export const Nav = () => {
   const isDark = theme === 'dark';
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+    }
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };

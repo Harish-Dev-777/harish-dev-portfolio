@@ -70,7 +70,7 @@ export const MetricsGrid = () => {
               >
                 <RevealText
                   text={metric.label}
-                  className={`text-[12vw] md:text-[12vw] lg:text-[14vh] font-black font-cabinet tracking-tight leading-none uppercase transition-colors duration-500 delay-100 ${
+                  className={`text-[12vw] md:text-[12vw] lg:text-[14vh] font-black font-oswald tracking-tight leading-none uppercase transition-colors duration-500 delay-100 ${
                     hoveredIndex === i ? "text-black" : "text-foreground"
                   }`}
                 />

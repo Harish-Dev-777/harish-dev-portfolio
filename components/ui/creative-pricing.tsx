@@ -33,7 +33,7 @@ function CreativePricing({
                     {tag}
                 </div>
                 <div className="relative pb-4 overflow-visible flex justify-center">
-                    <h2 className="relative text-3xl sm:text-4xl md:text-5xl font-black font-cabinet text-foreground rotate-[-1deg] tracking-tighter overflow-visible inline-block">
+                    <h2 className="relative text-3xl sm:text-4xl md:text-5xl font-black font-oswald text-foreground rotate-[-1deg] tracking-tighter overflow-visible inline-block">
                         {title}
                         {/* Stars — visible on all screens */}
                         <div className="absolute -right-3 top-0 md:-right-20 lg:-right-30 text-amber-500 rotate-12 text-3xl md:text-4xl">
@@ -100,7 +100,7 @@ function CreativePricing({
                                     {tier.icon}
                                 </div>
                                 <div>
-                                    <h3 className="font-cabinet font-black text-xl md:text-lg text-foreground leading-tight">
+                                    <h3 className="font-oswald font-black text-xl md:text-lg text-foreground leading-tight">
                                         {tier.name}
                                     </h3>
                                     <p className="font-roboto-condensed text-xs md:text-xs text-muted-foreground leading-tight uppercase tracking-wider mt-1 opacity-70">
@@ -110,7 +110,7 @@ function CreativePricing({
                             </div>
 
                             {/* Price */}
-                            <div className="mb-5 md:mb-4 font-cabinet">
+                            <div className="mb-5 md:mb-4 font-oswald">
                                 <span className="text-4xl md:text-3xl font-black text-foreground">
                                     {tier.price}
                                 </span>

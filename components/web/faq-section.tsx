@@ -80,7 +80,7 @@ export const FAQSection = () => {
             <RevealText
               text="Frequently Asked Questions"
               highlightedWords={["Asked"]}
-              className="text-4xl md:text-5xl lg:text-6xl font-black font-cabinet text-foreground uppercase leading-[0.9] tracking-tighter"
+              className="text-4xl md:text-5xl lg:text-6xl font-black font-oswald text-foreground uppercase leading-[0.9] tracking-tighter"
             />
           </div>
           <p className="mt-6 text-foreground/60 font-poppins text-sm md:text-base leading-relaxed max-w-sm">
@@ -107,7 +107,7 @@ export const FAQSection = () => {
                 >
                   <span 
                     className={cn(
-                      "font-cabinet font-bold text-lg md:text-2xl pr-8 transition-colors duration-300",
+                      "font-oswald font-bold text-lg md:text-2xl pr-8 transition-colors duration-300",
                       isOpen ? "text-orange-500" : "text-foreground group-hover:text-foreground/80"
                     )}
                   >

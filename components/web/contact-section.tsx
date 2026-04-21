@@ -489,7 +489,7 @@ export const ContactSection = () => {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
-                className="text-5xl md:text-7xl font-black font-cabinet tracking-tight mb-6 relative z-10"
+                className="text-5xl md:text-7xl font-black font-oswald tracking-tight mb-6 relative z-10"
               >
                 GOT IT.
               </motion.h3>

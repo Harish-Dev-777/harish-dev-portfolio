@@ -77,14 +77,14 @@ export const VelocityScroll = () => {
       {/* ~-10deg diagonal — matches the reference image angle */}
       <div className="rotate-[10deg] scale-[1.1] w-full space-y-6">
         {/* Row 1 — drifts LEFT to RIGHT */}
-        <div className="text-5xl sm:text-6xl md:text-8xl font-black text-foreground/60 font-cabinet tracking-tighter">
+        <div className="text-5xl sm:text-6xl md:text-8xl font-black text-foreground/60 font-oswald tracking-tighter">
           <ParallaxText baseVelocity={1.5}>
             UI Design · Webflow · Interaction Design · Branding · Next.js · Motion
           </ParallaxText>
         </div>
 
         {/* Row 2 — drifts RIGHT to LEFT (bold, full contrast) */}
-        <div className="text-5xl sm:text-6xl md:text-8xl font-black text-foreground font-cabinet tracking-tighter">
+        <div className="text-5xl sm:text-6xl md:text-8xl font-black text-foreground font-oswald tracking-tighter">
           <ParallaxText baseVelocity={-1.5}>
             Strategy · Development · Figma · React · Creative Direction · UX
           </ParallaxText>

@@ -19,35 +19,40 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
-const cabinet = localFont({
+const oswald = localFont({
   src: [
     {
-      path: "../public/fonts/CabinetGrotesk-Regular.otf",
+      path: "../public/fonts/oswald/Oswald-ExtraLight.otf",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/oswald/Oswald-Light.otf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/oswald/Oswald-Regular.otf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../public/fonts/CabinetGrotesk-Medium.otf",
+      path: "../public/fonts/oswald/Oswald-Medium.otf",
       weight: "500",
       style: "normal",
     },
     {
-      path: "../public/fonts/CabinetGrotesk-Bold.otf",
+      path: "../public/fonts/oswald/Oswald-SemiBold.otf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/oswald/Oswald-Bold.otf",
       weight: "700",
       style: "normal",
     },
-    {
-      path: "../public/fonts/CabinetGrotesk-Extrabold.otf",
-      weight: "800",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/CabinetGrotesk-Black.otf",
-      weight: "900",
-      style: "normal",
-    },
   ],
-  variable: "--font-cabinet",
+  variable: "--font-oswald",
 });
 
 export const metadata: Metadata = {
@@ -61,6 +66,7 @@ import ThemeSwitch from "@/components/ui/theme-switch";
 import { ScrollSocials } from "@/components/web/scroll-socials";
 import { MusicToggle } from "@/components/web/music-toggle";
 import { ConvexClientProvider } from "@/components/convex-client-provider";
+import { BackToTop } from "@/components/ui/back-to-top";
 
 export default function RootLayout({
   children,
@@ -71,7 +77,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${cabinet.variable} ${robotoCondensed.variable} ${caveat.variable} ${poppins.variable} h-full antialiased`}
+      className={`${oswald.variable} ${robotoCondensed.variable} ${caveat.variable} ${poppins.variable} h-full antialiased`}
     >
       <head>
         <script
@@ -88,6 +94,7 @@ export default function RootLayout({
             {/* Global UI Elements */}
             <ScrollSocials />
             <div className="fixed bottom-8 right-8 z-[100] flex flex-col items-center space-y-4">
+              <BackToTop />
               <MusicToggle />
               <ThemeSwitch />
             </div>

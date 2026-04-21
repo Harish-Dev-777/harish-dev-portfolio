@@ -9,7 +9,7 @@ export const Logo = ({ className, isWhite = false }: LogoProps) => {
   const textColor = isWhite ? "text-white" : "text-black";
 
   return (
-    <div className={cn("inline-flex items-baseline font-cabinet font-[900] tracking-tighter", className)}>
+    <div className={cn("inline-flex items-baseline font-oswald font-[900] tracking-tighter", className)}>
       {/* Letter H with rings */}
       <div className="relative">
         <div className="absolute -top-[0.45em] left-[0.1em] flex -space-x-[0.25em]">

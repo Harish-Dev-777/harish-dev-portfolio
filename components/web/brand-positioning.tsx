@@ -19,7 +19,7 @@ export const BrandPositioning = () => {
         <RevealText
           text="Built for Brands That Refuse to Look Ordinary"
           highlightedWords={["Brands", "Ordinary"]}
-          className="text-[10vw] md:text-[8vw] lg:text-[7vw] font-black leading-[0.9] tracking-tighter font-cabinet text-foreground mb-16"
+          className="text-[10vw] md:text-[8vw] lg:text-[7vw] font-black leading-[0.9] tracking-tighter font-oswald text-foreground mb-16"
         />
 
         {/* Detailed Positioning Content */}

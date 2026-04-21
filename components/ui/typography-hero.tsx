@@ -76,7 +76,15 @@ export const TypographyHero = ({
             }}
             className="text-lg md:text-2xl lg:text-3xl text-foreground font-medium tracking-tight font-roboto-condensed pointer-events-auto"
           >
-            Hi👋, my name is <span className="text-orange-500">Harish</span> and
+            Hi
+            <motion.span
+              animate={{ rotate: [0, 14, -8, 14, -4, 10, 0, 0] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              style={{ display: "inline-block", transformOrigin: "bottom right" }}
+            >
+              👋
+            </motion.span>
+            , my name is <span className="text-orange-500">Harish</span> and
             I'm a <span className="text-orange-500">Freelancer</span>.
           </motion.div>
         </div>
@@ -85,7 +93,7 @@ export const TypographyHero = ({
           ─── LAYER 1 (Z-10): SOLID TEXT ───
           Stays static (no mouse parallax).
         */}
-        <div className="absolute inset-0 z-10 flex w-full flex-col items-center justify-center pointer-events-none select-none md:pr-[6vw]">
+        <div className="absolute inset-0 z-10 flex w-full flex-col items-center justify-center pointer-events-none select-none">
           <div className="flex flex-col items-center translate-y-[12%]">
             <motion.h1
               initial={{ x: "-80vw", opacity: 0 }}
@@ -127,7 +135,7 @@ export const TypographyHero = ({
           ─── LAYER 2 (Z-20): IMAGE ───
           Includes dynamic cursor parallax.
         */}
-        <div className="absolute inset-0 z-20 flex w-full justify-center pointer-events-none items-end md:pr-[6vw]">
+        <div className="absolute inset-0 z-20 flex w-full justify-center pointer-events-none items-end">
           <motion.div
             style={{ x: springX }}
             initial={{ opacity: 0, scale: 0.9, y: 50 }}
@@ -188,10 +196,18 @@ export const TypographyHero = ({
       </motion.div>
 
       {/* MOBILE */}
-      <div className="md:hidden flex flex-col h-full w-full pl-12 pr-6 pt-24 pb-0 bg-background overflow-hidden relative">
+      <div className="md:hidden flex flex-col h-full w-full px-6 pt-24 pb-0 bg-background overflow-hidden relative">
         <div className="flex flex-col items-center pt-8 pb-0 z-10 w-full">
           <p className="text-xs md:text-sm font-medium text-foreground tracking-wide text-center">
-            Hi👋, my name is <span className="text-orange-500">Harish</span> and
+            Hi
+            <motion.span
+              animate={{ rotate: [0, 14, -8, 14, -4, 10, 0, 0] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              style={{ display: "inline-block", transformOrigin: "bottom right" }}
+            >
+              👋
+            </motion.span>
+            , my name is <span className="text-orange-500">Harish</span> and
             I'm a <span className="text-orange-500">freelancer</span>.
           </p>
           <h1 className="text-[12vw] leading-[1] font-black tracking-tighter font-roboto-condensed text-foreground whitespace-nowrap">

@@ -36,7 +36,7 @@ export function ServicesSection() {
                 </p>
                 <RevealText 
                     text="From idea to deployment, I handle everything."
-                    className="text-3xl md:text-5xl font-black font-cabinet text-foreground tracking-tighter"
+                    className="text-3xl md:text-5xl font-black font-oswald text-foreground tracking-tighter"
                     highlightedWords={["I", "handle", "everything"]}
                 />
             </div>
