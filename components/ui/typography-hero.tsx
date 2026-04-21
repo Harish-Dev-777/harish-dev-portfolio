@@ -102,7 +102,7 @@ export const TypographyHero = ({
                 x: { duration: 1.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 },
                 opacity: { duration: 0.8, delay: 0.2 },
               }}
-              className="text-[12vw] leading-[0.8] m-0 font-black tracking-[-0.05em] font-roboto-condensed select-none text-foreground pointer-events-auto cursor-default"
+              className="text-[12vw] leading-[0.8] m-0 font-black tracking-[-0.05em] font-oswald select-none text-foreground pointer-events-auto cursor-default"
             >
               {heading1}
             </motion.h1>
@@ -114,7 +114,7 @@ export const TypographyHero = ({
                 x: { duration: 1.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 },
                 opacity: { duration: 0.8, delay: 0.2 },
               }}
-              className="text-[12vw] leading-[0.8] m-0 font-black tracking-[-0.05em] font-roboto-condensed select-none text-orange-500 pointer-events-auto cursor-default"
+              className="text-[12vw] leading-[0.8] m-0 font-black tracking-[-0.05em] font-oswald select-none text-orange-500 pointer-events-auto cursor-default"
             >
               {heading2}
             </motion.h1>
@@ -210,10 +210,10 @@ export const TypographyHero = ({
             , my name is <span className="text-orange-500">Harish</span> and
             I'm a <span className="text-orange-500">freelancer</span>.
           </p>
-          <h1 className="text-[12vw] leading-[1] font-black tracking-tighter font-roboto-condensed text-foreground whitespace-nowrap">
+          <h1 className="text-[12vw] leading-[1] font-black tracking-tighter font-oswald text-foreground whitespace-nowrap">
             {heading1}
           </h1>
-          <h1 className="text-[12vw] leading-[0.8] font-black tracking-tighter font-roboto-condensed text-orange-500 whitespace-nowrap">
+          <h1 className="text-[12vw] leading-[0.8] font-black tracking-tighter font-oswald text-orange-500 whitespace-nowrap">
             {heading2}
           </h1>
 
