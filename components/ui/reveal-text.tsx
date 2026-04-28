@@ -37,7 +37,13 @@ export const RevealText = ({
         const wordChars = word.split("");
         
         return (
-          <span key={i} className="flex flex-nowrap mr-[0.25rem] mb-[0.1em]">
+          <span key={i} className="relative flex flex-nowrap mr-[0.25rem] mb-[0.1em] px-1">
+            {isHighlighted && (
+              <motion.span
+                style={{ opacity: useTransform(scrollYProgress, [0, 0.5], [0, 1]) }}
+                className="absolute inset-0 bg-orange-500/10 rounded-md -z-10"
+              />
+            )}
             {wordChars.map((char, j) => {
               const start = charGlobalIndex / totalLength;
               const end = (charGlobalIndex + 1) / totalLength;

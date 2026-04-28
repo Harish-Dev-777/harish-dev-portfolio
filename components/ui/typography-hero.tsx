@@ -162,12 +162,20 @@ export const TypographyHero = ({
             animate={{
               opacity: 1,
               flex:
-                hoveredCTA === "left" ? 1.2 : hoveredCTA === "right" ? 0.8 : 1,
+                hoveredCTA === "left" ? 1.4 : hoveredCTA === "right" ? 0.6 : 1,
             }}
-            transition={{ flex: { duration: 0.4, ease: "easeOut" } }}
+            transition={{ 
+              flex: { 
+                type: "spring", 
+                stiffness: 150, 
+                damping: 20,
+                mass: 0.8
+              },
+              opacity: { duration: 0.5, delay: 2 }
+            }}
             onMouseEnter={() => setHoveredCTA("left")}
             onMouseLeave={() => setHoveredCTA(null)}
-            className="bg-orange-500 text-white py-3.5 text-sm md:text-base font-bold font-roboto-condensed hover:bg-orange-600 transition-all duration-300 text-center rounded-sm border border-orange-500 shadow-lg shadow-orange-500/20 flex items-center justify-center whitespace-nowrap overflow-hidden"
+            className="bg-orange-500 text-white py-3.5 text-sm md:text-base font-bold font-roboto-condensed hover:bg-orange-600 text-center rounded-sm border border-orange-500 shadow-lg shadow-orange-500/20 flex items-center justify-center whitespace-nowrap overflow-hidden cursor-pointer"
           >
             <span className="truncate px-4">{leftButton}</span>
           </motion.a>
@@ -182,12 +190,20 @@ export const TypographyHero = ({
             animate={{
               opacity: 1,
               flex:
-                hoveredCTA === "right" ? 1.2 : hoveredCTA === "left" ? 0.8 : 1,
+                hoveredCTA === "right" ? 1.4 : hoveredCTA === "left" ? 0.6 : 1,
             }}
-            transition={{ flex: { duration: 0.4, ease: "easeOut" } }}
+            transition={{ 
+              flex: { 
+                type: "spring", 
+                stiffness: 150, 
+                damping: 20,
+                mass: 0.8
+              },
+              opacity: { duration: 0.5, delay: 2 }
+            }}
             onMouseEnter={() => setHoveredCTA("right")}
             onMouseLeave={() => setHoveredCTA(null)}
-            className="bg-transparent text-foreground py-3.5 text-sm md:text-base font-bold font-roboto-condensed hover:bg-orange-500/10 transition-colors duration-300 text-center border border-orange-500 rounded-sm flex items-center justify-center whitespace-nowrap overflow-hidden"
+            className="bg-transparent text-foreground py-3.5 text-sm md:text-base font-bold font-roboto-condensed hover:bg-orange-500/10 text-center border border-orange-500 rounded-sm flex items-center justify-center whitespace-nowrap overflow-hidden cursor-pointer"
           >
             <span className="truncate px-4">{rightButton}</span>
           </motion.button>

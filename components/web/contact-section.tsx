@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { z } from "zod/v4";
+import { RevealText } from "@/components/ui/reveal-text";
 
 // ─── Validation Schema ────────────────────────────────────────────
 const contactSchema = z.object({
@@ -171,6 +172,40 @@ export const ContactSection = () => {
         className="w-full min-h-screen bg-background flex items-center py-20 pl-24 pr-6 md:pl-[12vw] md:pr-12 lg:pl-[15vw] lg:pr-24"
       >
         <div className="max-w-4xl mx-auto w-full">
+          <div className="mb-16 md:mb-24 flex flex-col items-start gap-1">
+            {/* Desktop & Tablet: 2 Lines */}
+            <div className="hidden md:flex flex-col items-start gap-1">
+              <RevealText
+                text="Let's build"
+                highlightedWords={["build"]}
+                className="text-5xl md:text-7xl lg:text-8xl font-oswald font-black uppercase tracking-tighter leading-[0.9] text-foreground"
+              />
+              <RevealText
+                text="something amazing!"
+                highlightedWords={["amazing"]}
+                className="text-5xl md:text-7xl lg:text-8xl font-oswald font-black uppercase tracking-tighter leading-[0.9] text-foreground"
+              />
+            </div>
+
+            {/* Mobile: 3 Lines */}
+            <div className="flex md:hidden flex-col items-start gap-1">
+              <RevealText
+                text="Let's build"
+                highlightedWords={["build"]}
+                className="text-4xl font-oswald font-black uppercase tracking-tighter leading-[0.9] text-foreground"
+              />
+              <RevealText
+                text="something"
+                className="text-4xl font-oswald font-black uppercase tracking-tighter leading-[0.9] text-foreground"
+              />
+              <RevealText
+                text="amazing!"
+                highlightedWords={["amazing"]}
+                className="text-4xl font-oswald font-black uppercase tracking-tighter leading-[0.9] text-foreground"
+              />
+            </div>
+          </div>
+
           <form onSubmit={handleSubmit} className="w-full">
             {/* Form Text */}
             <div className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] leading-[2.2] md:leading-[2] font-poppins font-light text-foreground/80">
@@ -181,7 +216,7 @@ export const ContactSection = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                placeholder="first and last name"
+                placeholder="your name"
                 required
                 className={cn(
                   "bg-transparent border-b px-2 py-1 mx-1 text-foreground placeholder:text-foreground/30 focus:outline-none transition-colors w-[220px] md:w-[350px]",
@@ -197,7 +232,7 @@ export const ContactSection = () => {
                 name="company"
                 value={formData.company}
                 onChange={handleInputChange}
-                placeholder="business or shop name"
+                placeholder="company"
                 className="bg-transparent border-b border-foreground/20 px-2 py-1 mx-1 text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-foreground transition-colors w-[250px] md:w-[400px]"
               />
               <span className="text-sm md:text-base text-foreground/40 align-baseline ml-1">
@@ -224,7 +259,7 @@ export const ContactSection = () => {
                         : "text-foreground/30"
                     )}
                   >
-                    {formData.service || "select a service"}
+                    {formData.service || "service"}
                   </span>
                   {/* Custom arrow */}
                   <div
@@ -337,7 +372,7 @@ export const ContactSection = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                placeholder="name@example.com"
+                placeholder="email"
                 required
                 className={cn(
                   "bg-transparent border-b px-2 py-1 mx-1 text-foreground placeholder:text-foreground/30 focus:outline-none transition-colors w-[250px] md:w-[380px]",
@@ -353,7 +388,7 @@ export const ContactSection = () => {
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
-                placeholder="+91 98765 43210"
+                placeholder="phone"
                 required
                 className={cn(
                   "bg-transparent border-b px-2 py-1 mx-1 text-foreground placeholder:text-foreground/30 focus:outline-none transition-colors w-[220px] md:w-[300px]",
@@ -369,7 +404,7 @@ export const ContactSection = () => {
                 name="details"
                 value={formData.details}
                 onChange={handleInputChange}
-                placeholder="your project details"
+                placeholder="details"
                 className="bg-transparent border-b border-foreground/20 px-2 py-1 mx-1 text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-foreground transition-colors w-[280px] md:w-[450px]"
               />
               <span>.</span>

@@ -30,16 +30,21 @@ const ThemeSwitch = () => {
           onChange={() => setTheme(isDark ? "light" : "dark")}
         />
 
-        {/* Moon Icon */}
+        {/* Moon Icon (Visible in Dark Mode) */}
         <motion.div
           initial={false}
           animate={{
-            scale: isDark ? 0 : 1,
-            rotate: isDark ? 180 : 0,
-            opacity: isDark ? 0 : 1,
+            scale: isDark ? 1 : 0,
+            rotate: isDark ? 0 : -180,
+            opacity: isDark ? 1 : 0,
           }}
-          transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-          className="absolute text-orange-500 flex items-center justify-center"
+          transition={{
+            type: "spring",
+            stiffness: 200,
+            damping: 25,
+            mass: 1.2
+          }}
+          className="absolute text-orange-500 flex items-center justify-center will-change-transform"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -54,17 +59,22 @@ const ThemeSwitch = () => {
             />
           </svg>
         </motion.div>
-
-        {/* Sun Icon */}
+ 
+        {/* Sun Icon (Visible in Light Mode) */}
         <motion.div
           initial={false}
           animate={{
-            scale: isDark ? 1 : 0,
-            rotate: isDark ? 0 : -180,
-            opacity: isDark ? 1 : 0,
+            scale: isDark ? 0 : 1,
+            rotate: isDark ? 180 : 0,
+            opacity: isDark ? 0 : 1,
           }}
-          transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-          className="absolute text-orange-500 flex items-center justify-center"
+          transition={{
+            type: "spring",
+            stiffness: 200,
+            damping: 25,
+            mass: 1.2
+          }}
+          className="absolute text-orange-500 flex items-center justify-center will-change-transform"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
