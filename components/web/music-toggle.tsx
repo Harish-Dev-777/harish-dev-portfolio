@@ -11,7 +11,7 @@ export const MusicToggle = () => {
 
     useEffect(() => {
         setIsMounted(true);
-        audioRef.current = new Audio("/music/Timeless.mpeg");
+        audioRef.current = new Audio("/music/Struct.mpeg");
         audioRef.current.loop = true;
         audioRef.current.volume = 0;
 
