@@ -8,18 +8,25 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    id: "p1",
-    title: "Sara Hotel",
-    description: "Premium hotel booking and management experience.",
-    image: "/projeccts/Sarahotel.png",
-    url: "https://sara-hotel-alpha.vercel.app/",
-  },
-  {
     id: "p2",
     title: "Shadow Tech",
     description: "Modern technology solutions and services platform.",
     image: "/projeccts/Shadowtech.png",
     url: "https://shadow-tech.vercel.app/",
+  },
+  {
+    id: "p6",
+    title: "Agamudaiyar",
+    description: "Community platform and directory.",
+    image: "/projeccts/Agamudaiyar.png",
+    url: "https://agamudaiyar.vercel.app/",
+  },
+  {
+    id: "p1",
+    title: "Sara Hotel",
+    description: "Premium hotel booking and management experience.",
+    image: "/projeccts/Sarahotel.png",
+    url: "https://sara-hotel-alpha.vercel.app/",
   },
   {
     id: "p3",
@@ -41,13 +48,6 @@ export const projects: Project[] = [
     description: "Immersive 3D product showcase.",
     image: "/projeccts/Iphone17.png",
     url: "https://iphone-17-pro-max-ruby.vercel.app/",
-  },
-  {
-    id: "p6",
-    title: "Agamudaiyar",
-    description: "Community platform and directory.",
-    image: "/projeccts/Agamudaiyar.png",
-    url: "https://agamudaiyar.vercel.app/",
   },
   {
     id: "p7",

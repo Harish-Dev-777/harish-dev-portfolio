@@ -25,8 +25,8 @@ export const About = () => {
                             "modern",
                             "high-performance",
                             "scalable",
-                            "React",
                             "Next.js",
+                            "React",
                             "Convex"
                         ]}
                         className="text-4xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight font-roboto-condensed text-foreground"

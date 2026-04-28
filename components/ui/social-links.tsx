@@ -34,7 +34,7 @@ const SocialLink = ({ platform, href, label }: SocialLinkProps) => {
         aria-label={label}
         target="_blank"
         rel="noopener noreferrer"
-        className="relative flex items-center justify-center w-[45px] h-[45px] md:w-[50px] md:h-[50px] rounded-full bg-background border border-border overflow-hidden transition-all duration-300 hover:shadow-xl hover:text-white dark:hover:text-white text-muted-foreground group-hover:border-transparent"
+        className="relative flex items-center justify-center w-[45px] h-[45px] md:w-[50px] md:h-[50px] rounded-full bg-background border border-border overflow-hidden transition-all duration-300 hover:shadow-xl hover:text-white dark:hover:text-white text-[#FF4D00] group-hover:border-transparent"
       >
         {/* Fill Layer */}
         <div 

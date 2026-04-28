@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, useMotionValue, animate, useTransform } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/projects";
 import { RevealText } from "@/components/ui/reveal-text";
 
@@ -65,7 +65,7 @@ const ProjectCard = ({
 
   // Original coverflow transforms
   const scale = useTransform(offsetFromCenter, [-step, 0, step], [0.85, 1, 0.85]);
-  const opacity = useTransform(offsetFromCenter, [-step * 1.5, 0, step * 1.5], [0.3, 1, 0.3]);
+  const opacity = useTransform(offsetFromCenter, [-step * 1.5, 0, step * 1.5], [0.7, 1, 0.7]);
   const rotateY = useTransform(offsetFromCenter, [-step, 0, step], [25, 0, -25]);
   const zIndex = useTransform(offsetFromCenter, (o) =>
     Math.abs(o) < step / 2 ? 10 : 1
@@ -93,12 +93,19 @@ const ProjectCard = ({
           className="absolute inset-0 w-full h-full object-cover object-top"
           draggable={false}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none" />
         <div className="absolute bottom-4 left-4 right-4 text-left pointer-events-none">
           <div className="bg-white px-3 py-2 border-2 border-black inline-block -rotate-1 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
             <h3 className="text-[10px] md:text-sm font-black text-black font-oswald uppercase tracking-tight">
               {project.title}
             </h3>
+          </div>
+        </div>
+
+        {/* Go Live Arrow */}
+        <div className="absolute top-4 right-4 z-20">
+          <div className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full border-2 border-black flex items-center justify-center shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-12">
+            <ArrowUpRight className="w-5 h-5 md:w-6 md:h-6 text-black" strokeWidth={3} />
           </div>
         </div>
       </motion.div>
@@ -124,7 +131,6 @@ export const Projects = () => {
   const SAFE_LO = total * 17;
   const SAFE_HI = total * 18 - 1;
 
-  const trackRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const x = useMotionValue(0);
@@ -281,7 +287,7 @@ export const Projects = () => {
 
   // ─── Pointer / Touch drag ───
   useEffect(() => {
-    const el = trackRef.current;
+    const el = containerRef.current;
     if (!el) return;
 
     const clientX = (e: PointerEvent | TouchEvent) =>
@@ -391,12 +397,7 @@ export const Projects = () => {
             : "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
         }}
       >
-        {/* Invisible drag overlay */}
-        <div
-          ref={trackRef}
-          className="absolute inset-0 z-20"
-          style={{ cursor: "grab" }}
-        />
+        {/* Carousel Track */}
 
         <motion.div
           className="flex items-center pt-4 pb-10"
