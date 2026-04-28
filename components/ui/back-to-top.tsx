@@ -39,7 +39,7 @@ export const BackToTop = () => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.5, y: 20 }}
           onClick={scrollToTop}
-          className="relative flex items-center justify-center w-12 h-12 rounded-full border border-orange-500/30 bg-background/50 backdrop-blur-md transition-colors hover:border-orange-500 shadow-lg pointer-events-auto cursor-pointer group"
+          className="relative flex items-center justify-center w-12 h-12 rounded-full border border-orange-500/30 bg-white dark:bg-zinc-950 transition-colors hover:border-orange-500 shadow-lg pointer-events-auto cursor-pointer group"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           aria-label="Scroll back to top"

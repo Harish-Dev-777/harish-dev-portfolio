@@ -141,7 +141,14 @@
   html {
     @apply font-sans;
   }
-  
+  ::selection {
+    background-color: #f97316;
+    color: #ffffff;
+  }
+  ::-moz-selection {
+    background-color: #f97316;
+    color: #ffffff;
+  }
 }
 
 /* Removed old autofill blocks to move them to the end */

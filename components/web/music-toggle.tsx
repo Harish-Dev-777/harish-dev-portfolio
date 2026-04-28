@@ -68,7 +68,7 @@ export const MusicToggle = () => {
         <div className="relative group">
             <motion.button
                 onClick={togglePlay}
-                className="relative flex items-center justify-center w-12 h-12 rounded-full border border-orange-500/30 bg-background/50 backdrop-blur-md transition-colors hover:border-orange-500 group"
+                className="relative flex items-center justify-center w-12 h-12 rounded-full border border-orange-500/30 bg-white dark:bg-zinc-950 transition-colors hover:border-orange-500 group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
             >

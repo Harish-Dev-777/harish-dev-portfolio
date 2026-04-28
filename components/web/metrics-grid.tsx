@@ -10,7 +10,7 @@ const METRICS = [
     description: "Integrating 3d models, animations, and interactions into websites to create immersive user experiences.",
   },
   {
-    label: "E-commerce Websites",
+    label: "E-commerce",
     description: "Creating seamless online stores with smooth checkout flows and engaging product displays.",
   },
  
@@ -32,7 +32,7 @@ export const MetricsGrid = () => {
       {/* Section Label - Moved higher up */}
       <div className="absolute top-12 left-0 pl-16 pr-6 md:pl-[12vw] lg:pl-[15vw] z-50">
          <p className="text-sm md:text-base font-medium tracking-[0.2em] uppercase text-foreground/40">
-          What I Do
+          What I Do Best
         </p>
       </div>
 
