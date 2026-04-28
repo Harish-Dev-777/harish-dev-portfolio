@@ -6,20 +6,21 @@ import { RevealText } from "@/components/ui/reveal-text";
 
 const METRICS = [
   {
-    label: "3D",
-    description: "I search the internet for visual references and then combine them to create my own work.",
+    label: "3D Websites",
+    description: "Integrating 3d models, animations, and interactions into websites to create immersive user experiences.",
   },
   {
-    label: "VISUAL",
-    description: "Crafting aesthetics that communicate your brand's core identity effectively.",
+    label: "E-commerce Websites",
+    description: "Creating seamless online stores with smooth checkout flows and engaging product displays.",
   },
+ 
   {
+    label: "Landing Pages",
+    description: "Creating high-converting landing pages that are optimized for user engagement and lead generation.",
+  },
+   {
     label: "MOTION",
     description: "Adding life and fluidity to static designs through thoughtful animations.",
-  },
-  {
-    label: "PRODUCT",
-    description: "Building intuitive interfaces that prioritize user experience and function.",
   },
 ];
 
