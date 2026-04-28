@@ -181,8 +181,8 @@ export const ContactSection = () => {
                 className="text-5xl md:text-7xl lg:text-8xl font-oswald font-black uppercase tracking-tighter leading-[0.9] text-foreground"
               />
               <RevealText
-                text="something amazing!"
-                highlightedWords={["amazing"]}
+                text="your website today"
+                highlightedWords={["website", "today"]}
                 className="text-5xl md:text-7xl lg:text-8xl font-oswald font-black uppercase tracking-tighter leading-[0.9] text-foreground"
               />
             </div>
@@ -190,17 +190,18 @@ export const ContactSection = () => {
             {/* Mobile: 3 Lines */}
             <div className="flex md:hidden flex-col items-start gap-1">
               <RevealText
-                text="Let's build"
+                text="Let's build"    
                 highlightedWords={["build"]}
                 className="text-4xl font-oswald font-black uppercase tracking-tighter leading-[0.9] text-foreground"
               />
               <RevealText
-                text="something"
+                text="your website"
+                highlightedWords={["website"]}
                 className="text-4xl font-oswald font-black uppercase tracking-tighter leading-[0.9] text-foreground"
               />
               <RevealText
-                text="amazing!"
-                highlightedWords={["amazing"]}
+                text="today"
+                highlightedWords={["today"]}
                 className="text-4xl font-oswald font-black uppercase tracking-tighter leading-[0.9] text-foreground"
               />
             </div>
