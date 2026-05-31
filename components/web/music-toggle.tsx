@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Music } from "lucide-react";
 
@@ -8,28 +8,28 @@ export const MusicToggle = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const [isMounted, setIsMounted] = useState(false);
-
     const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null);
+    const hasTriedAutoRef = useRef(false);
 
-    const fadeAudio = (targetVolume: number, duration: number = 2000) => {
+    const fadeAudio = useCallback((targetVolume: number, duration: number = 2000) => {
         if (!audioRef.current) return;
-        
+
         if (fadeIntervalRef.current) {
             clearInterval(fadeIntervalRef.current);
         }
-        
+
         const audio = audioRef.current;
         const startVolume = audio.volume;
         const steps = 40;
         const interval = duration / steps;
         const volumeStep = (targetVolume - startVolume) / steps;
-        
+
         let currentStep = 0;
         fadeIntervalRef.current = setInterval(() => {
             currentStep++;
             const newVolume = Math.max(0, Math.min(1, startVolume + volumeStep * currentStep));
             audio.volume = newVolume;
-            
+
             if (currentStep >= steps) {
                 if (fadeIntervalRef.current) {
                     clearInterval(fadeIntervalRef.current);
@@ -39,25 +39,61 @@ export const MusicToggle = () => {
                 }
             }
         }, interval);
-    };
+    }, []);
 
     useEffect(() => {
         setIsMounted(true);
-        audioRef.current = new Audio("/music/Struct.mpeg");
-        audioRef.current.loop = true;
-        audioRef.current.volume = 0;
 
-        const playPromise = audioRef.current.play();
-        if (playPromise !== undefined) {
-            playPromise.then(() => {
-                setIsPlaying(true);
-                fadeAudio(0.20, 3000);
-            }).catch(() => {
-                // Autoplay blocked by browser policy
-            });
-        }
+        // Create audio element
+        const audio = new Audio("/music/Struct.mpeg");
+        audio.loop = true;
+        audio.volume = 0;
+        audio.preload = "auto";
+        audioRef.current = audio;
+
+        const events = ["click", "touchstart", "mousedown", "keydown"];
+
+        const removeListeners = () => {
+            events.forEach((evt) =>
+                document.removeEventListener(evt, autoPlayOnInteraction, true)
+            );
+        };
+
+        // This handler runs on the FIRST user interaction
+        const autoPlayOnInteraction = () => {
+            if (hasTriedAutoRef.current) return;
+            hasTriedAutoRef.current = true;
+
+            if (audioRef.current && !isPlayingRef.current) {
+                audioRef.current.play().then(() => {
+                    setIsPlaying(true);
+                    isPlayingRef.current = true;
+                    fadeAudio(0.20, 3000);
+                }).catch(() => {
+                    hasTriedAutoRef.current = false;
+                });
+            }
+
+            if (hasTriedAutoRef.current) {
+                removeListeners();
+            }
+        };
+
+        // 1) Try immediate autoplay first (works on localhost & trusted sites)
+        audio.play().then(() => {
+            hasTriedAutoRef.current = true;
+            isPlayingRef.current = true;
+            setIsPlaying(true);
+            fadeAudio(0.20, 3000);
+        }).catch(() => {
+            // 2) Autoplay blocked — register interaction listeners as fallback
+            events.forEach((evt) =>
+                document.addEventListener(evt, autoPlayOnInteraction, { capture: true, passive: true })
+            );
+        });
 
         return () => {
+            removeListeners();
             if (audioRef.current) {
                 audioRef.current.pause();
                 audioRef.current = null;
@@ -66,7 +102,13 @@ export const MusicToggle = () => {
                 clearInterval(fadeIntervalRef.current);
             }
         };
-    }, []);
+    }, [fadeAudio]);
+
+    // Keep a ref in sync with isPlaying state so the event handler can read it
+    const isPlayingRef = useRef(false);
+    useEffect(() => {
+        isPlayingRef.current = isPlaying;
+    }, [isPlaying]);
 
     const togglePlay = () => {
         if (!audioRef.current) return;
@@ -77,16 +119,10 @@ export const MusicToggle = () => {
             setIsPlaying(false);
         } else {
             // Fade in
-            const playPromise = audioRef.current.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    fadeAudio(0.20); // Background volume level
-                    setIsPlaying(true);
-                }).catch(() => {});
-            } else {
-                fadeAudio(0.20); // Background volume level
+            audioRef.current.play().then(() => {
+                fadeAudio(0.20);
                 setIsPlaying(true);
-            }
+            }).catch(() => {});
         }
     };
 
