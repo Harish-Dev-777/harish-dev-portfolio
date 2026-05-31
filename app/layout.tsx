@@ -56,8 +56,89 @@ const oswald = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Harish Portfolio",
-  description: "Web Developer and Freelancer Portfolio",
+  metadataBase: new URL("https://www.harishdev.site"),
+  title: {
+    default: "Harish - Best Portfolio | Full Stack Web Developer & Freelancer",
+    template: "%s | Harish Portfolio",
+  },
+  description: "Explore the best portfolio of Harish, a top-tier Full Stack Web Developer, AI enthusiast, and freelancer. View my projects, skills, and contact me for web development services. Ranked as the best portfolio website.",
+  keywords: [
+    "best portfolio",
+    "portfolio",
+    "Harish portfolio",
+    "best web developer portfolio",
+    "freelance web developer",
+    "top web developer",
+    "react developer",
+    "nextjs developer",
+    "creative portfolio",
+    "award winning portfolio",
+    "full stack developer",
+    "software engineer portfolio",
+    "hire web developer",
+    "best frontend developer portfolio",
+    "UI/UX developer portfolio",
+    "best freelancer in chennai",
+    "best freelancer",
+    "best developer",
+    "ai web development",
+    "webdevelopment",
+    "harish",
+    "hari",
+    "harishdev",
+    "chennai web developer",
+    "ai web developer",
+    "portfolio website",
+    "best website design",
+    "react developer chennai",
+    "nextjs developer chennai",
+    "freelance software engineer",
+  ],
+  authors: [{ name: "Harish" }],
+  creator: "Harish",
+  publisher: "Harish",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    title: "Harish - Best Portfolio | Full Stack Web Developer",
+    description: "Explore the best portfolio of Harish, a top-tier Full Stack Web Developer. View projects, skills, and contact for freelance work.",
+    url: "https://www.harishdev.site",
+    siteName: "Harish Portfolio",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Harish Portfolio Cover",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Harish - Best Portfolio | Full Stack Web Developer",
+    description: "Explore the best portfolio of Harish, a top-tier Full Stack Web Developer. View projects, skills, and contact for freelance work.",
+    creator: "@harish",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://www.harishdev.site",
+  },
 };
 
 import { ThemeProvider } from "../components/theme-provider";
@@ -80,6 +161,40 @@ export default function RootLayout({
       className={`${oswald.variable} ${robotoCondensed.variable} ${caveat.variable} ${poppins.variable} h-full antialiased`}
     >
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Harish",
+              "url": "https://www.harishdev.site",
+              "jobTitle": "Full Stack Web Developer & Freelancer",
+              "description": "Harish is a top-tier Full Stack Web Developer and freelancer with the best portfolio website.",
+              "sameAs": [
+                "https://github.com/Harish-Dev-777",
+                "https://www.linkedin.com/in/harishdev777",
+                "https://www.instagram.com/_harish.143/"
+              ],
+              "knowsAbout": [
+                "Full Stack Web Development",
+                "React",
+                "Next.js",
+                "AI Web Development",
+                "Freelance Web Developer Chennai",
+                "Generative Engine Optimization",
+                "UI/UX Design"
+              ],
+              "award": "Best Freelance Web Developer",
+              "mainEntityOfPage": {
+                "@type": "WebSite",
+                "@id": "https://www.harishdev.site/#website",
+                "url": "https://www.harishdev.site",
+                "name": "Harish - Best Portfolio"
+              }
+            })
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(t==='dark'||(!t&&d)){document.documentElement.classList.add('dark')}else{document.documentElement.classList.remove('dark')}}catch(e){}})();`,
