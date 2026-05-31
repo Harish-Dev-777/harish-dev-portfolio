@@ -19,7 +19,6 @@ export const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { theme } = useTheme();
-  const isDark = theme === 'dark';
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -66,7 +65,7 @@ export const Nav = () => {
         className="z-[121] cursor-pointer"
         onClick={(e) => handleNavClick(e, '#hero')}
       >
-        <Logo isWhite={isDark} className="text-4xl" />
+        <Logo className="text-4xl" />
       </motion.div>
 
       {/* Desktop Nav */}

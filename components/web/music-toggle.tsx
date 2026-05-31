@@ -9,22 +9,14 @@ export const MusicToggle = () => {
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const [isMounted, setIsMounted] = useState(false);
 
-    useEffect(() => {
-        setIsMounted(true);
-        audioRef.current = new Audio("/music/Struct.mpeg");
-        audioRef.current.loop = true;
-        audioRef.current.volume = 0;
-
-        return () => {
-            if (audioRef.current) {
-                audioRef.current.pause();
-                audioRef.current = null;
-            }
-        };
-    }, []);
+    const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
     const fadeAudio = (targetVolume: number, duration: number = 2000) => {
         if (!audioRef.current) return;
+        
+        if (fadeIntervalRef.current) {
+            clearInterval(fadeIntervalRef.current);
+        }
         
         const audio = audioRef.current;
         const startVolume = audio.volume;
@@ -33,19 +25,48 @@ export const MusicToggle = () => {
         const volumeStep = (targetVolume - startVolume) / steps;
         
         let currentStep = 0;
-        const fade = setInterval(() => {
+        fadeIntervalRef.current = setInterval(() => {
             currentStep++;
             const newVolume = Math.max(0, Math.min(1, startVolume + volumeStep * currentStep));
             audio.volume = newVolume;
             
             if (currentStep >= steps) {
-                clearInterval(fade);
+                if (fadeIntervalRef.current) {
+                    clearInterval(fadeIntervalRef.current);
+                }
                 if (targetVolume === 0) {
                     audio.pause();
                 }
             }
         }, interval);
     };
+
+    useEffect(() => {
+        setIsMounted(true);
+        audioRef.current = new Audio("/music/Struct.mpeg");
+        audioRef.current.loop = true;
+        audioRef.current.volume = 0;
+
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                setIsPlaying(true);
+                fadeAudio(0.20, 3000);
+            }).catch(() => {
+                // Autoplay blocked by browser policy
+            });
+        }
+
+        return () => {
+            if (audioRef.current) {
+                audioRef.current.pause();
+                audioRef.current = null;
+            }
+            if (fadeIntervalRef.current) {
+                clearInterval(fadeIntervalRef.current);
+            }
+        };
+    }, []);
 
     const togglePlay = () => {
         if (!audioRef.current) return;
@@ -56,9 +77,16 @@ export const MusicToggle = () => {
             setIsPlaying(false);
         } else {
             // Fade in
-            audioRef.current.play();
-            fadeAudio(0.4); // Moderate volume
-            setIsPlaying(true);
+            const playPromise = audioRef.current.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    fadeAudio(0.20); // Background volume level
+                    setIsPlaying(true);
+                }).catch(() => {});
+            } else {
+                fadeAudio(0.20); // Background volume level
+                setIsPlaying(true);
+            }
         }
     };
 

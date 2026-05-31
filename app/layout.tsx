@@ -148,6 +148,7 @@ import { ScrollSocials } from "@/components/web/scroll-socials";
 import { MusicToggle } from "@/components/web/music-toggle";
 import { ConvexClientProvider } from "@/components/convex-client-provider";
 import { BackToTop } from "@/components/ui/back-to-top";
+import { SmoothScroll } from "@/components/smooth-scroll";
 
 export default function RootLayout({
   children,
@@ -158,7 +159,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${oswald.variable} ${robotoCondensed.variable} ${caveat.variable} ${poppins.variable} h-full antialiased`}
+      className={`${oswald.variable} ${robotoCondensed.variable} ${caveat.variable} ${poppins.variable} h-full antialiased relative`}
     >
       <head>
         <script
@@ -202,19 +203,21 @@ export default function RootLayout({
         />
       </head>
       <body className="font-roboto-condensed min-h-full flex flex-col relative text-foreground">
-        <IntroTransition />
-        <ConvexClientProvider>
-          <ThemeProvider>
-            {children}
-            {/* Global UI Elements */}
-            <ScrollSocials />
-            <div className="fixed bottom-8 right-8 z-[100] flex flex-col items-center space-y-4">
-              <BackToTop />
-              <MusicToggle />
-              <ThemeSwitch />
-            </div>
-          </ThemeProvider>
-        </ConvexClientProvider>
+        <SmoothScroll>
+          <IntroTransition />
+          <ConvexClientProvider>
+            <ThemeProvider>
+              {children}
+              {/* Global UI Elements */}
+              <ScrollSocials />
+              <div className="fixed bottom-8 right-8 z-[100] flex flex-col items-center space-y-4">
+                <BackToTop />
+                <MusicToggle />
+                <ThemeSwitch />
+              </div>
+            </ThemeProvider>
+          </ConvexClientProvider>
+        </SmoothScroll>
       </body>
     </html>
   );

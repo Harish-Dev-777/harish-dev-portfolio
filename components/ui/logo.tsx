@@ -6,7 +6,7 @@ interface LogoProps {
 }
 
 export const Logo = ({ className, isWhite = false }: LogoProps) => {
-  const textColor = isWhite ? "text-white" : "text-black";
+  const textColor = isWhite ? "text-white" : "text-black dark:text-white";
 
   return (
     <div className={cn("inline-flex items-baseline font-oswald font-[900] tracking-tighter", className)}>
